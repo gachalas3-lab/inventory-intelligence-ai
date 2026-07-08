@@ -66,10 +66,13 @@ for (let j = i + 1; j < Math.min(i + 20, items.length); j++) {
         size = text;
     }
 
-    // Find the first decimal number (Average Sales)
-    if (!averageSales && /^\d+\.\d+$/.test(text)) {
-        averageSales = text;
-    }
+    // Debug every value we're checking
+console.log("Checking:", text);
+
+if (!averageSales && /^\d+\.\d+$/.test(text)) {
+    console.log("FOUND SALES:", upc, text);
+    averageSales = text;
+}
 
     if (size && averageSales) break;
 }
