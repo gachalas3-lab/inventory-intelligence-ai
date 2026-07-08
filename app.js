@@ -49,7 +49,7 @@ button.addEventListener("click", async () => {
                 if (!/^\d{12}$/.test(items[i].str)) continue;
 
                 const upc = items[i].str;
-                const upc = items[i].str;
+                
 
 const name = items[i + 2]?.str || "";
 
