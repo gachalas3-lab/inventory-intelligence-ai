@@ -40,30 +40,36 @@ button.addEventListener("click", async () => {
             allText += pageText + "\n";
         }
 
-        const upcs = allText.match(/\d{12}/g) || [];
-        const pieces = allText.split(/\d{12}\s/);
+        const lines = allText.split("\n");
+let products = [];
 
-        let products = [];
+for (const line of lines) {
 
-        for (let i = 1; i < pieces.length; i++) {
+    const match = line.match(
+        /(\d{12})\s+(.+?)\s+(\d+\s(?:PK|ML|L))\s+\d+\s+\w+\s+\w+\s+\w+\s+\d+\s+\d+\s+\d+\s+\d{8}\s+(\d+\.\d+)/
+    );
 
-            let name = pieces[i]
-                .split(/\d+\sPK|\d+\sML|\d+\sL/)[0]
-                .trim()
-                .replace(/\s+/g, " ");
+    if (!match) continue;
 
-            console.log(pieces[i]);
-            const averageMatch = pieces[i].match(/\d+\.\d+/);
+    products.push({
+        department: currentDepartment.replace(" POG", ""),
+        upc: match[1],
+        name: match[2].trim(),
+        size: match[3],
+        averageSales: match[4]
+    });
+}
 
-products.push({
-    department: currentDepartment.replace(" POG", ""),
-    upc: upcs[i - 1],
-    name: name,
-    averageSales: averageMatch ? averageMatch[1] : "Unknown"
-});
-        }
-
-        document.getElementById("results").innerHTML =
+document.getElementById("results").innerHTML =
+    products.map(p => `
+        <div>
+            <b>${p.department}</b> |
+            ${p.upc} |
+            ${p.name} |
+            ${p.size} |
+            Avg Sales: ${p.averageSales}
+        </div>
+    `).join("");
     products.map(p =>
         `<div>
             <b>${p.department}</b> |
