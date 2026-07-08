@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Intelligence</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📦 Inventory Intelligence</h1>
+
+        <p>
+            Upload a Shoppers Drug Mart inventory report to analyze stockouts.
+        </p>
+
+        <input type="file" id="pdfUpload" accept=".pdf">
+
+        <br><br>
+
+        <button id="analyzeBtn">
+            Analyze Report
+        </button>
+
+        <hr>
+
+        <h2>Results</h2>
+
+        <div id="results">
+            Waiting for report...
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+
+</body>
+</html>
