@@ -70,8 +70,13 @@ for (let j = i + 1; j < Math.min(i + 20, items.length); j++) {
     // Debug every value we're checking
 console.log("Checking:", text);
 
-if (!averageSales && /^\d+\.\d+$/.test(text)) {
-    console.log("FOUND SALES:", upc, text);
+const num = Number(text);
+
+if (
+    !averageSales &&
+    !isNaN(num) &&
+    text.includes(".")
+) {
     averageSales = text;
 }
 
