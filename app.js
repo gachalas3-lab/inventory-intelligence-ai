@@ -43,6 +43,9 @@ button.addEventListener("click", async () => {
                 if (!/^\d{12}$/.test(items[i].str)) continue;
 
                 const upc = items[i].str;
+                if (upc === "786162650047") {
+    console.log(items.slice(i, i + 15).map(item => item.str));
+}
 
 const name = items[i + 2]?.str || "";
 
