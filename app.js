@@ -43,28 +43,36 @@ button.addEventListener("click", async () => {
                 if (!/^\d{12}$/.test(items[i].str)) continue;
 
                 const upc = items[i].str;
-                const name = items[i + 2]?.str || "";
-                const size = items[i + 4]?.str || "";
 
-                // Search ahead for the first decimal number
-                let averageSales = "";
+const name = items[i + 2]?.str || "";
 
-                for (let j = i; j < Math.min(i + 25, items.length); j++) {
+let size = "";
+let averageSales = "";
 
-                    if (/^\d+\.\d+$/.test(items[j].str)) {
-                        averageSales = items[j].str;
-                        break;
-                    }
+for (let j = i + 1; j < Math.min(i + 20, items.length); j++) {
 
-                }
+    const text = items[j].str;
 
-                products.push({
-                    department: currentDepartment,
-                    upc,
-                    name,
-                    size,
-                    averageSales
-                });
+    // Find the size
+    if (!size && /^\d+\s?(PK|ML|L)$/.test(text)) {
+        size = text;
+    }
+
+    // Find the first decimal number (Average Sales)
+    if (!averageSales && /^\d+\.\d+$/.test(text)) {
+        averageSales = text;
+    }
+
+    if (size && averageSales) break;
+}
+
+products.push({
+    department: currentDepartment,
+    upc,
+    name,
+    size,
+    averageSales
+});
 
             }
 
