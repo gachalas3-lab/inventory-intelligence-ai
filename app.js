@@ -85,6 +85,10 @@ products.push({
     size,
     averageSales
 });
+console.log({
+    upc,
+    averageSales
+});
 
             }
 
