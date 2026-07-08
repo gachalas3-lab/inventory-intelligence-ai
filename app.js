@@ -26,6 +26,7 @@ button.addEventListener("click", async () => {
 
             const pdfPage = await pdf.getPage(page);
             const textContent = await pdfPage.getTextContent();
+            console.log(textContent.items.slice(0, 30));
             console.log(textContent.items);
 
             const pageText = textContent.items
