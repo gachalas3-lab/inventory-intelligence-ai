@@ -19,62 +19,69 @@ button.addEventListener("click", async () => {
             data: typedArray
         }).promise;
 
-        let allText = "";
+        let products = [];
         let currentDepartment = "";
 
         for (let page = 1; page <= pdf.numPages; page++) {
 
             const pdfPage = await pdf.getPage(page);
             const textContent = await pdfPage.getTextContent();
-            console.log(textContent.items.slice(0, 5));
-            console.log(textContent.items);
 
-            const pageText = textContent.items
-                .map(item => item.str)
-                .join(" ");
+            const items = textContent.items;
 
-            const match = pageText.match(/(\d{3})-([A-Z& ]+)/);
+            // Find department name on this page
+            const pageText = items.map(i => i.str).join(" ");
+            const deptMatch = pageText.match(/(\d{3})-([A-Z& ]+)/);
 
-            if (match) {
-                currentDepartment = match[2].trim();
+            if (deptMatch) {
+                currentDepartment = deptMatch[2].trim().replace(" POG", "");
             }
 
-            allText += pageText + "\n";
+            // Look for every UPC
+            for (let i = 0; i < items.length; i++) {
+
+                if (!/^\d{12}$/.test(items[i].str)) continue;
+
+                const upc = items[i].str;
+                const name = items[i + 2]?.str || "";
+                const size = items[i + 4]?.str || "";
+
+                // Search ahead for the first decimal number
+                let averageSales = "";
+
+                for (let j = i; j < Math.min(i + 25, items.length); j++) {
+
+                    if (/^\d+\.\d+$/.test(items[j].str)) {
+                        averageSales = items[j].str;
+                        break;
+                    }
+
+                }
+
+                products.push({
+                    department: currentDepartment,
+                    upc,
+                    name,
+                    size,
+                    averageSales
+                });
+
+            }
+
         }
 
-        const lines = allText.split("\n");
-let products = [];
-
-for (const line of lines) {
-
-    const match = line.match(
-        /(\d{12})\s+(.+?)\s+(\d+\s(?:PK|ML|L))\s+\d+\s+\w+\s+\w+\s+\w+\s+\d+\s+\d+\s+\d+\s+\d{8}\s+(\d+\.\d+)/
-    );
-
-    if (!match) continue;
-
-    products.push({
-        department: currentDepartment.replace(" POG", ""),
-        upc: match[1],
-        name: match[2].trim(),
-        size: match[3],
-        averageSales: match[4]
-    });
-}
-
-document.getElementById("results").innerHTML =
-    products.map(p => `
-        <div>
-            <b>${p.department}</b> |
-            ${p.upc} |
-            ${p.name} |
-            ${p.size} |
-            Avg Sales: ${p.averageSales}
-        </div>
-    `).join("");
-    
-
         console.log(products);
+
+        document.getElementById("results").innerHTML =
+            products.map(p => `
+                <div>
+                    <b>${p.department}</b> |
+                    ${p.upc} |
+                    ${p.name} |
+                    ${p.size} |
+                    Avg Sales: ${p.averageSales}
+                </div>
+            `).join("");
 
     };
 
