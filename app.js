@@ -1,3 +1,8 @@
+import { db } from "./firebase.js";
+import {
+    collection,
+    addDoc
+} from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 const button = document.getElementById("analyzeBtn");
 
 button.addEventListener("click", async () => {
