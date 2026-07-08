@@ -49,9 +49,7 @@ button.addEventListener("click", async () => {
                 if (!/^\d{12}$/.test(items[i].str)) continue;
 
                 const upc = items[i].str;
-                if (upc === "067000014581") {
-    console.log(items.slice(i, i + 35).map(item => item.str));
-}
+                const upc = items[i].str;
 
 const name = items[i + 2]?.str || "";
 
@@ -62,21 +60,13 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
 
     const text = items[j].str;
 
-    // Find the size
     if (!size && /^\d+(\.\d+)?\s?(PK|ML|L)$/.test(text)) {
         size = text;
     }
 
-    // Debug every value we're checking
-    console.log("Checking:", text);
-
     const num = Number(text);
 
-    if (
-        !averageSales &&
-        !isNaN(num) &&
-        text.includes(".")
-    ) {
+    if (!averageSales && !isNaN(num) && text.includes(".")) {
         averageSales = text;
     }
 
@@ -85,24 +75,11 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
     }
 }
 
-    if (size && averageSales) break;
-}
-
-console.log({
-    upc,
-    size,
-    averageSales
-});
-
 products.push({
     department: currentDepartment,
     upc,
     name,
     size,
-    averageSales
-});
-console.log({
-    upc,
     averageSales
 });
 
