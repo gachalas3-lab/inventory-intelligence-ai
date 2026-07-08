@@ -28,8 +28,8 @@ button.addEventListener("click", async () => {
             const textContent = await pdfPage.getTextContent();
 
             const pageText = textContent.items
-    .map(item => item.str)
-    .join("\n");
+                .map(item => item.str)
+                .join(" ");
 
             const match = pageText.match(/(\d{3})-([A-Z& ]+)/);
 
