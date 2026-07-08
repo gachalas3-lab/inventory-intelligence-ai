@@ -11,51 +11,62 @@ button.addEventListener("click", async () => {
 
     const reader = new FileReader();
 
-reader.onload = async function () {
+    reader.onload = async function () {
 
-    const typedArray = new Uint8Array(this.result);
+        const typedArray = new Uint8Array(this.result);
 
-    const pdf = await pdfjsLib.getDocument({
-        data: typedArray
-    }).promise;
+        const pdf = await pdfjsLib.getDocument({
+            data: typedArray
+        }).promise;
 
-    let allText = "";
+        let allText = "";
+        let currentDepartment = "";
 
-    for (let page = 1; page <= pdf.numPages; page++) {
+        for (let page = 1; page <= pdf.numPages; page++) {
 
-        const pdfPage = await pdf.getPage(page);
-        const textContent = await pdfPage.getTextContent();
+            const pdfPage = await pdf.getPage(page);
+            const textContent = await pdfPage.getTextContent();
 
-        allText += textContent.items.map(item => item.str).join(" ");
-        allText += "\n";
-    }
+            const pageText = textContent.items
+                .map(item => item.str)
+                .join(" ");
 
-    const lines = allText.split(/\d{12}\s/);
+            const match = pageText.match(/(\d{3})-([A-Z& ]+)/);
 
-    let products = [];
+            if (match) {
+                currentDepartment = match[2].trim();
+            }
 
-    for (let i = 1; i < lines.length; i++) {
+            allText += pageText + "\n";
+        }
 
-        const piece = lines[i];
+        const upcs = allText.match(/\d{12}/g) || [];
+        const pieces = allText.split(/\d{12}\s/);
 
-        const upc = allText.match(/\d{12}/g)[i-1];
+        let products = [];
 
-        const name = piece.split(/\d+\sPK|\d+\sML|\d+\sL/)[0]
-            .trim()
-            .replace(/\s+/g," ");
+        for (let i = 1; i < pieces.length; i++) {
 
-        products.push({
-            upc,
-            name
-        });
-    }
+            let name = pieces[i]
+                .split(/\d+\sPK|\d+\sML|\d+\sL/)[0]
+                .trim()
+                .replace(/\s+/g, " ");
 
-    document.getElementById("results").innerHTML =
-        products.map(p => `<div>${p.upc} - ${p.name}</div>`).join("");
+            products.push({
+                department: currentDepartment,
+                upc: upcs[i - 1],
+                name: name
+            });
+        }
 
-    console.log(products);
+        document.getElementById("results").innerHTML =
+            products.map(p =>
+                `<div><b>${p.department}</b> | ${p.upc} | ${p.name}</div>`
+            ).join("");
 
-};
+        console.log(products);
+
+    };
 
     reader.readAsArrayBuffer(file);
 
