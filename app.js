@@ -89,11 +89,12 @@ products.push({
 
         console.log(products);
         await addDoc(collection(db, "reports"), {
-    uploadedAt: new Date(),
+    uploadedAt: new Date().toISOString(),
+    productCount: products.length,
     products: products
 });
 
-console.log("Report saved!");
+console.log("✅ Report saved to Firebase!");
 
         document.getElementById("results").innerHTML =
             products.map(p => `
