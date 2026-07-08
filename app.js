@@ -58,7 +58,7 @@ const name = items[i + 2]?.str || "";
 let size = "";
 let averageSales = "";
 
-for (let j = i + 1; j < Math.min(i + 20, items.length); j++) {
+for (let j = i + 1; j < Math.min(i + 35, items.length); j++)
 
     const text = items[j].str;
 
