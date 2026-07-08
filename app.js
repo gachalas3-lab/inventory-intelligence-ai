@@ -53,6 +53,7 @@ button.addEventListener("click", async () => {
                 .replace(/\s+/g, " ");
 
             console.log(pieces[i]);
+            const averageMatch = pieces[i].match(/\d+\.\d+/);
 
 products.push({
     department: currentDepartment.replace(" POG", ""),
