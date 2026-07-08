@@ -35,16 +35,31 @@ button.addEventListener("click", async () => {
 
             const items = textContent.items;
 
-            // Find department name on this page
-            const pageText = items.map(i => i.str).join(" ");
-            const deptMatch = pageText.match(/(\d{3})-([A-Z& ]+)/);
-
-            if (deptMatch) {
-                currentDepartment = deptMatch[2].trim().replace(" POG", "");
-            }
+            
 
             // Look for every UPC
             for (let i = 0; i < items.length; i++) {
+
+                const text = items[i].str;
+
+// Detect department changes anywhere on the page
+const deptMatch = text.match(/^(\d{3})-([A-Z& ]+)$/);
+
+if (deptMatch) {
+    const deptCode = deptMatch[2].trim();
+
+    const departmentNames = {
+        HBA: "HEALTH & BEAUTY",
+        OTC: "OVER THE COUNTER",
+        CONFECTION: "CONFECTION",
+        BEVERAGE: "BEVERAGE",
+        COSMETICS: "COSMETICS",
+        BEAUTY: "BEAUTY"
+    };
+
+    currentDepartment = departmentNames[deptCode] || deptCode;
+    continue;
+}
 
                 if (!/^\d{12}$/.test(items[i].str)) continue;
 
