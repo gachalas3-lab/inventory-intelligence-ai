@@ -28,8 +28,8 @@ button.addEventListener("click", async () => {
             const textContent = await pdfPage.getTextContent();
 
             const pageText = textContent.items
-                .map(item => item.str)
-                .join(" ");
+    .map(item => item.str)
+    .join("\n");
 
             const match = pageText.match(/(\d{3})-([A-Z& ]+)/);
 
@@ -70,14 +70,7 @@ document.getElementById("results").innerHTML =
             Avg Sales: ${p.averageSales}
         </div>
     `).join("");
-    products.map(p =>
-        `<div>
-            <b>${p.department}</b> |
-            ${p.upc} |
-            ${p.name} |
-            Avg Sales: ${p.averageSales}
-        </div>`
-    ).join("");
+    
 
         console.log(products);
 
