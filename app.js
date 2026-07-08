@@ -83,6 +83,12 @@ if (
     if (size && averageSales) break;
 }
 
+console.log({
+    upc,
+    size,
+    averageSales
+});
+
 products.push({
     department: currentDepartment,
     upc,
