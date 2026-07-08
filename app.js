@@ -3,6 +3,7 @@ import {
     collection,
     addDoc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+console.log("APP STARTED");
 const button = document.getElementById("analyzeBtn");
 
 button.addEventListener("click", async () => {
