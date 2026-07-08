@@ -88,6 +88,12 @@ products.push({
         }
 
         console.log(products);
+        await addDoc(collection(db, "reports"), {
+    uploadedAt: new Date(),
+    products: products
+});
+
+console.log("Report saved!");
 
         document.getElementById("results").innerHTML =
             products.map(p => `
