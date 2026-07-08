@@ -54,7 +54,7 @@ for (let j = i + 1; j < Math.min(i + 20, items.length); j++) {
     const text = items[j].str;
 
     // Find the size
-    if (!size && /^\d+\s?(PK|ML|L)$/.test(text)) {
+    if (!size && /^\d+(\.\d+)?\s?(PK|ML|L)$/.test(text)) {
         size = text;
     }
 
