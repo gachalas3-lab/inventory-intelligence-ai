@@ -58,7 +58,7 @@ const name = items[i + 2]?.str || "";
 let size = "";
 let averageSales = "";
 
-for (let j = i + 1; j < Math.min(i + 35, items.length); j++)
+for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
 
     const text = items[j].str;
 
@@ -68,16 +68,21 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++)
     }
 
     // Debug every value we're checking
-console.log("Checking:", text);
+    console.log("Checking:", text);
 
-const num = Number(text);
+    const num = Number(text);
 
-if (
-    !averageSales &&
-    !isNaN(num) &&
-    text.includes(".")
-) {
-    averageSales = text;
+    if (
+        !averageSales &&
+        !isNaN(num) &&
+        text.includes(".")
+    ) {
+        averageSales = text;
+    }
+
+    if (size && averageSales) {
+        break;
+    }
 }
 
     if (size && averageSales) break;
