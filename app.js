@@ -52,17 +52,25 @@ button.addEventListener("click", async () => {
                 .trim()
                 .replace(/\s+/g, " ");
 
-            products.push({
-                department: currentDepartment,
-                upc: upcs[i - 1],
-                name: name
-            });
+            const averageMatch = pieces[i].match(/(\d+\.\d+)\s0\s\d+/);
+
+products.push({
+    department: currentDepartment.replace(" POG", ""),
+    upc: upcs[i - 1],
+    name: name,
+    averageSales: averageMatch ? averageMatch[1] : "Unknown"
+});
         }
 
         document.getElementById("results").innerHTML =
-            products.map(p =>
-                `<div><b>${p.department}</b> | ${p.upc} | ${p.name}</div>`
-            ).join("");
+    products.map(p =>
+        `<div>
+            <b>${p.department}</b> |
+            ${p.upc} |
+            ${p.name} |
+            Avg Sales: ${p.averageSales}
+        </div>`
+    ).join("");
 
         console.log(products);
 
