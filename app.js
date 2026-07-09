@@ -71,10 +71,8 @@ if (deptMatch) {
 }
 
 // Detect POG changes
-const pogMatch = text.match(/^POG:\d+\s+(.+)$/);
-
-if (pogMatch) {
-    currentPOG = pogMatch[1].trim();
+if (text.startsWith("POG:")) {
+    currentPOG = items[i + 2]?.str || "";
     console.log("POG FOUND:", currentPOG);
     continue;
 }
