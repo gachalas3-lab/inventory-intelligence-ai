@@ -56,6 +56,12 @@ function showPriority() {
 
 <h2>Highest Priority Reorders</h2>
 
+<input
+    id="prioritySearch"
+    type="text"
+    placeholder="🔍 Search priority reorders..."
+>
+
 <div class="priorityList">
 
 ${top20.map((product, index) => `
@@ -97,6 +103,28 @@ ${top20.map((product, index) => `
 </div>
 
 `;
+
+
+const prioritySearch = document.getElementById("prioritySearch");
+
+prioritySearch.addEventListener("input", () => {
+
+    const search = prioritySearch.value.toLowerCase();
+
+    document.querySelectorAll(".priorityItem").forEach(item => {
+
+        const text = item.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+            item.style.display = "";
+        }
+        else {
+            item.style.display = "none";
+        }
+
+    });
+
+});
 
 }
 

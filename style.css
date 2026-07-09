@@ -262,7 +262,8 @@ button:hover{
     font-size:14px;
 
 }
-#searchBox{
+#searchBox,
+#prioritySearch{
 
     width:100%;
 
@@ -280,7 +281,8 @@ button:hover{
 
 }
 
-#searchBox:focus{
+#searchBox:focus,
+#prioritySearch:focus{
 
     outline:none;
 
