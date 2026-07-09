@@ -26,7 +26,8 @@ button.addEventListener("click", async () => {
         }).promise;
 
         let products = [];
-        let currentDepartment = "";
+let currentDepartment = "";
+let currentPOG = "";
 
         for (let page = 1; page <= pdf.numPages; page++) {
 
@@ -56,6 +57,14 @@ if (deptMatch) {
         COSMETICS: "COSMETICS",
         BEAUTY: "BEAUTY"
     };
+
+// Detect POG changes
+const pogMatch = text.match(/^POG:\d+\s+(.+)$/);
+
+if (pogMatch) {
+    currentPOG = pogMatch[1].trim();
+    continue;
+}
 
     currentDepartment = departmentNames[deptCode] || deptCode;
     continue;
@@ -92,6 +101,7 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
 
 products.push({
     department: currentDepartment,
+    pog: currentPOG,
     upc,
     name,
     size,
@@ -115,6 +125,7 @@ console.log("✅ Report saved to Firebase!");
             products.map(p => `
                 <div>
                     <b>${p.department}</b> |
+                    ${p.pog} |
                     ${p.upc} |
                     ${p.name} |
                     ${p.size} |
