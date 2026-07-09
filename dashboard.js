@@ -66,10 +66,32 @@ function showPriority() {
 // Show Department page (placeholder for now)
 function showDepartments() {
 
+    // Count products in each department
+    const departments = {};
+
+    uniqueProducts.forEach(product => {
+
+        if (!departments[product.department]) {
+            departments[product.department] = [];
+        }
+
+        departments[product.department].push(product);
+
+    });
+
+    // Build buttons
     content.innerHTML = `
         <h2>Restocking Priority by Department</h2>
 
-        <p>Department buttons will go here.</p>
+        ${Object.entries(departments)
+            .sort((a, b) => b[1].length - a[1].length)
+            .map(([name, products]) => `
+                <button class="deptButton" data-dept="${name}">
+                    ${name}<br>
+                    ${products.length} products
+                </button>
+            `)
+            .join("")}
     `;
 
 }
