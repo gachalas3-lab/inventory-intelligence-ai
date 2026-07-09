@@ -58,15 +58,17 @@ if (deptMatch) {
         BEAUTY: "BEAUTY"
     };
 
+
+
+    currentDepartment = departmentNames[deptCode] || deptCode;
+    continue;
+}
+
 // Detect POG changes
 const pogMatch = text.match(/^POG:\d+\s+(.+)$/);
 
 if (pogMatch) {
     currentPOG = pogMatch[1].trim();
-    continue;
-}
-
-    currentDepartment = departmentNames[deptCode] || deptCode;
     continue;
 }
 
