@@ -62,9 +62,30 @@ function showPriority() {
     placeholder="🔍 Search priority reorders..."
 >
 
+<label><b>Show:</b></label>
+
+<select id="priorityLimit">
+
+    <option value="10">Top 10</option>
+
+    <option value="25">Top 25</option>
+
+    <option value="50" selected>Top 50</option>
+
+    <option value="100">Top 100</option>
+
+    <option value="99999">Show All</option>
+
+</select>
+
 <div class="priorityList">
 
-${top20.map((product, index) => `
+${uniqueProducts
+    .slice(
+        0,
+        Number(sessionStorage.getItem("priorityLimit") || 50)
+    )
+    .map((product, index) => `
 
 <div class="priorityItem">
 
@@ -123,6 +144,22 @@ prioritySearch.addEventListener("input", () => {
         }
 
     });
+
+});
+
+const priorityLimit = document.getElementById("priorityLimit");
+
+priorityLimit.value =
+    sessionStorage.getItem("priorityLimit") || "50";
+
+priorityLimit.addEventListener("change", () => {
+
+    sessionStorage.setItem(
+        "priorityLimit",
+        priorityLimit.value
+    );
+
+    showPriority();
 
 });
 
