@@ -52,14 +52,39 @@ console.log(content);
 // Show Highest Priority page
 function showPriority() {
 
-    content.innerHTML =
-        top20.map(p => `
-            <div style="margin-bottom:15px;">
-                <b>${p.name}</b><br>
-                ${p.department} | ${p.pog}<br>
-                Avg Sales: ${p.averageSales}
-            </div>
-        `).join("");
+    content.innerHTML = `
+
+<h2>Highest Priority Reorders</h2>
+
+<div class="priorityGrid">
+
+${top20.map(product => `
+
+<div class="priorityCard">
+
+    <div class="priorityTitle">
+        ${product.name}
+    </div>
+
+    <div class="priorityDepartment">
+        📂 ${product.department}
+    </div>
+
+    <div class="priorityPOG">
+        📍 ${product.pog}
+    </div>
+
+    <div class="prioritySales">
+        📈 Avg Sales
+        <span>${product.averageSales}</span>
+    </div>
+
+</div>
+
+`).join("")}
+
+</div>
+`;
 
 }
 
