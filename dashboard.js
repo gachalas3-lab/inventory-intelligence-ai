@@ -193,20 +193,8 @@ function showDepartmentProducts(department) {
             ${product.name}
         </div>
 
-        <div class="departmentPOG">
-            📍 ${product.pog}
-        </div>
-
-    </div>
-
-    <div class="departmentSales">
-
-        <div class="departmentSalesLabel">
-            Avg Sales
-        </div>
-
-        <div class="departmentSalesNumber">
-            ${product.averageSales}
+        <div class="departmentDetails">
+            📍 ${product.pog} • Avg Sales: <b>${product.averageSales}</b>
         </div>
 
     </div>
