@@ -86,7 +86,7 @@ function showDepartments() {
         ${Object.entries(departments)
             .sort((a, b) => b[1].length - a[1].length)
             .map(([name, products]) => `
-                <button class="deptButton" data-dept="${name}">
+                <button class="deptButton ${getDepartmentPriority(products)}" data-dept="${name}">
                     ${name}<br>
                     ${products.length} products
                 </button>
@@ -135,6 +135,30 @@ function showDepartmentProducts(department) {
 
 }
 
+function getDepartmentPriority(products) {
+
+    const sorted = [...products].sort(
+        (a, b) => Number(b.averageSales) - Number(a.averageSales)
+    );
+
+    const topProducts = sorted.slice(0, 10);
+
+    const average =
+        topProducts.reduce(
+            (sum, product) => sum + Number(product.averageSales),
+            0
+        ) / topProducts.length;
+
+    if (average >= 5) {
+        return "high";
+    }
+
+    if (average >= 3) {
+        return "medium";
+    }
+
+    return "low";
+}
 // Button clicks
 document.getElementById("priorityBtn")
     .addEventListener("click", showPriority);

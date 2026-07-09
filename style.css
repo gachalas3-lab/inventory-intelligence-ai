@@ -75,3 +75,15 @@ button:hover{
     color:#2b4c7e;
     margin-bottom:20px;
 }
+
+.high{
+    border-left:10px solid #d62828;
+}
+
+.medium{
+    border-left:10px solid #f4a261;
+}
+
+.low{
+    border-left:10px solid #2a9d8f;
+}
