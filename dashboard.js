@@ -177,7 +177,13 @@ function showDepartmentProducts(department) {
     content.innerHTML = `
         <button id="backBtn">⬅ Back</button>
 
-        <h2>${department}</h2>
+<h2>${department}</h2>
+
+<input
+    id="searchBox"
+    type="text"
+    placeholder="🔍 Search products..."
+>
 
         ${departmentProducts.map((product, index) => `
 
@@ -206,6 +212,26 @@ function showDepartmentProducts(department) {
 
     document.getElementById("backBtn")
         .addEventListener("click", showDepartments);
+        const searchBox = document.getElementById("searchBox");
+
+searchBox.addEventListener("input", () => {
+
+    const search = searchBox.value.toLowerCase();
+
+    document.querySelectorAll(".departmentItem").forEach(item => {
+
+        const text = item.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+            item.style.display = "";
+        }
+        else {
+            item.style.display = "none";
+        }
+
+    });
+
+});
 
 }
 function getDepartmentEmoji(name) {
