@@ -85,12 +85,33 @@ function showDepartments() {
 
         ${Object.entries(departments)
             .sort((a, b) => b[1].length - a[1].length)
-            .map(([name, products]) => `
-                <button class="deptButton ${getDepartmentPriority(products)}" data-dept="${name}">
-                    ${name}<br>
-                    ${products.length} products
-                </button>
-            `)
+            .map(([name, products]) => {
+
+    const avgDemand =
+        products.reduce(
+            (sum, p) => sum + Number(p.averageSales),
+            0
+        ) / products.length;
+
+    return `
+        <button class="deptButton ${getDepartmentPriority(products)}" data-dept="${name}">
+
+            <div class="deptEmoji">${getDepartmentEmoji(name)}</div>
+
+            <div class="deptTitle">${name}</div>
+
+            <div class="deptDemand">
+                Avg Demand: ${avgDemand.toFixed(2)}
+            </div>
+
+            <div class="deptCount">
+                ${products.length} products to review
+            </div>
+
+        </button>
+    `;
+
+})
             .join("")}
     `;
     document.querySelectorAll(".deptButton").forEach(button => {
@@ -134,7 +155,61 @@ function showDepartmentProducts(department) {
         .addEventListener("click", showDepartments);
 
 }
+function getDepartmentEmoji(name) {
 
+    switch (name) {
+
+        case "OVER THE COUNTER":
+            return "💊";
+
+        case "HEALTH & BEAUTY":
+            return "🧴";
+
+        case "COSMETICS":
+            return "💄";
+
+        case "HAIRCARE":
+            return "💇";
+
+        case "BEVERAGE":
+            return "🥤";
+
+        case "CONFECTION":
+            return "🍫";
+
+        case "HOUSEHOLD":
+            return "🧹";
+
+        case "FOOD":
+            return "🍽️";
+
+        case "BABY":
+            return "👶";
+
+        case "NUTRA":
+            return "💚";
+
+        case "PRESTIGE":
+            return "✨";
+
+        case "DERM":
+            return "🩹";
+
+        case "SEASONAL":
+            return "🎁";
+
+        case "FRONT OF STORE":
+            return "🛒";
+
+        case "ENTERTAINMENT":
+            return "🎮";
+
+        default:
+            return "📦";
+
+    }
+
+}
 function getDepartmentPriority(products) {
 
     const sorted = [...products].sort(
