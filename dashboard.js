@@ -15,11 +15,8 @@ reports.sort(
     (a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt)
 );
 
-// Get newest report
-const latestReport = reports[0];
-
-// Get its products
-const products = latestReport.products;
+// Combine products from every report
+const products = reports.flatMap(report => report.products);
 
 // Sort highest average sales first
 products.sort(
