@@ -206,3 +206,85 @@ button:hover{
     font-weight:bold;
 
 }
+
+.departmentItem{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+    background:white;
+
+    padding:14px 18px;
+
+    margin-bottom:10px;
+
+    border-radius:10px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+}
+
+.departmentRank{
+
+    width:45px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    color:#2b4c7e;
+
+}
+
+.departmentInfo{
+
+    flex:1;
+
+}
+
+.departmentName{
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    margin-bottom:4px;
+
+}
+
+.departmentPOG{
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.departmentSales{
+
+    width:90px;
+
+    text-align:center;
+
+}
+
+.departmentSalesLabel{
+
+    font-size:12px;
+
+    color:#888;
+
+}
+
+.departmentSalesNumber{
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    color:#2b4c7e;
+
+}

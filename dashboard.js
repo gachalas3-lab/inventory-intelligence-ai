@@ -179,13 +179,41 @@ function showDepartmentProducts(department) {
 
         <h2>${department}</h2>
 
-        ${departmentProducts.map(product => `
-            <div style="margin-bottom:15px;">
-                <b>${product.name}</b><br>
-                ${product.pog}<br>
-                Avg Sales: ${product.averageSales}
-            </div>
-        `).join("")}
+        ${departmentProducts.map((product, index) => `
+
+<div class="departmentItem">
+
+    <div class="departmentRank">
+        #${index + 1}
+    </div>
+
+    <div class="departmentInfo">
+
+        <div class="departmentName">
+            ${product.name}
+        </div>
+
+        <div class="departmentPOG">
+            📍 ${product.pog}
+        </div>
+
+    </div>
+
+    <div class="departmentSales">
+
+        <div class="departmentSalesLabel">
+            Avg Sales
+        </div>
+
+        <div class="departmentSalesNumber">
+            ${product.averageSales}
+        </div>
+
+    </div>
+
+</div>
+
+`).join("")}
     `;
 
     document.getElementById("backBtn")
