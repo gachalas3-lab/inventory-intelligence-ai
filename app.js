@@ -1,7 +1,10 @@
 import { db } from "./firebase.js";
 import {
     collection,
-    addDoc
+    addDoc,
+    query,
+    where,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 console.log("APP STARTED");
 const button = document.getElementById("analyzeBtn");
@@ -121,10 +124,29 @@ products.push({
         }
 
         console.log(products);
-        await addDoc(collection(db, "reports"), {
+
+        // Create a unique ID for this report
+const reportId = file.name + "_" + products.length;
+
+        const reportsRef = collection(db, "reports");
+
+const q = query(
+    reportsRef,
+    where("reportId", "==", reportId)
+);
+
+const existing = await getDocs(q);
+
+if (!existing.empty) {
+    alert("This report has already been uploaded.");
+    return;
+}
+
+await addDoc(reportsRef, {
+    reportId,
     uploadedAt: new Date().toISOString(),
     productCount: products.length,
-    products: products
+    products
 });
 
 console.log("✅ Report saved to Firebase!");
