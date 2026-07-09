@@ -56,27 +56,38 @@ function showPriority() {
 
 <h2>Highest Priority Reorders</h2>
 
-<div class="priorityGrid">
+<div class="priorityList">
 
-${top20.map(product => `
+${top20.map((product, index) => `
 
-<div class="priorityCard">
+<div class="priorityItem">
 
-    <div class="priorityTitle">
-        ${product.name}
+    <div class="priorityRank">
+        #${index + 1}
     </div>
 
-    <div class="priorityDepartment">
-        📂 ${product.department}
+    <div class="priorityInfo">
+
+        <div class="priorityName">
+            ${product.name}
+        </div>
+
+        <div class="priorityDetails">
+            📂 ${product.department} • 📍 ${product.pog}
+        </div>
+
     </div>
 
-    <div class="priorityPOG">
-        📍 ${product.pog}
-    </div>
+    <div class="priorityAvg">
 
-    <div class="prioritySales">
-        📈 Avg Sales
-        <span>${product.averageSales}</span>
+        <div class="avgLabel">
+            Avg Sales
+        </div>
+
+        <div class="avgNumber">
+            ${product.averageSales}
+        </div>
+
     </div>
 
 </div>
@@ -84,6 +95,7 @@ ${top20.map(product => `
 `).join("")}
 
 </div>
+
 `;
 
 }
