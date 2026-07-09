@@ -35,6 +35,8 @@ let currentPOG = "";
             const textContent = await pdfPage.getTextContent();
 
             const items = textContent.items;
+            console.log("PAGE", page);
+console.log(items.map(item => item.str));
 
             
 
