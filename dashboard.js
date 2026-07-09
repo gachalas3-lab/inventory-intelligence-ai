@@ -47,6 +47,7 @@ uniqueProducts.sort(
 const top20 = uniqueProducts.slice(0, 20);
 
 const content = document.getElementById("content");
+console.log(content);
 
 // Show Highest Priority page
 function showPriority() {
