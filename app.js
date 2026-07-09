@@ -36,7 +36,8 @@ let currentPOG = "";
 
             const items = textContent.items;
             console.log("PAGE", page);
-console.log(items.map(item => item.str));
+const allText = items.map(item => item.str).join("\n");
+console.log(allText);
 
             
 
