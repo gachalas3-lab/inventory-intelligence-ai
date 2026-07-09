@@ -93,6 +93,45 @@ function showDepartments() {
             `)
             .join("")}
     `;
+    document.querySelectorAll(".deptButton").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const department = button.dataset.dept;
+
+        showDepartmentProducts(department);
+
+    });
+
+});
+
+}
+function showDepartmentProducts(department) {
+
+    const departmentProducts = uniqueProducts.filter(
+        product => product.department === department
+    );
+
+    departmentProducts.sort(
+        (a, b) => Number(b.averageSales) - Number(a.averageSales)
+    );
+
+    content.innerHTML = `
+        <button id="backBtn">⬅ Back</button>
+
+        <h2>${department}</h2>
+
+        ${departmentProducts.map(product => `
+            <div style="margin-bottom:15px;">
+                <b>${product.name}</b><br>
+                ${product.pog}<br>
+                Avg Sales: ${product.averageSales}
+            </div>
+        `).join("")}
+    `;
+
+    document.getElementById("backBtn")
+        .addEventListener("click", showDepartments);
 
 }
 
