@@ -9,6 +9,15 @@ import {
 const snapshot = await getDocs(collection(db, "reports"));
 
 const reports = snapshot.docs.map(doc => doc.data());
+console.log("Reports found:", reports.length);
+
+reports.forEach((report, index) => {
+    console.log(
+        `Report ${index + 1}:`,
+        report.reportId,
+        report.productCount
+    );
+});
 
 // Sort newest first
 reports.sort(
