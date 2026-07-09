@@ -27,13 +27,24 @@ reports.sort(
 // Combine products from every report
 const products = reports.flatMap(report => report.products);
 
+// Remove duplicate UPCs
+const seen = new Set();
+
+const uniqueProducts = products.filter(product => {
+    if (seen.has(product.upc)) {
+        return false;
+    }
+    seen.add(product.upc);
+    return true;
+});
+
 // Sort highest average sales first
-products.sort(
+uniqueProducts.sort(
     (a, b) => Number(b.averageSales) - Number(a.averageSales)
 );
 
 // Take the top 20
-const top20 = products.slice(0, 20);
+const top20 = uniqueProducts.slice(0, 20);
 
 // Display them
 document.getElementById("priorityList").innerHTML =
