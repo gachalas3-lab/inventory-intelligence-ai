@@ -94,7 +94,7 @@ function showDepartments() {
         ) / products.length;
 
     return `
-        <button class="deptButton ${getDepartmentPriority(products)}" data-dept="${name}">
+        <button class="deptButton" data-dept="${name}">
 
             <div class="deptEmoji">${getDepartmentEmoji(name)}</div>
 

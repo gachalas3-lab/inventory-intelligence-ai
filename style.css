@@ -46,8 +46,10 @@ button:hover{
 }
 
 .deptButton{
-    width:260px;
-    height:120px;
+
+    width:320px;
+
+    min-height:170px;
 
     margin:15px;
     padding:20px;
@@ -76,17 +78,7 @@ button:hover{
     margin-bottom:20px;
 }
 
-.high{
-    border-left:10px solid #d62828;
-}
 
-.medium{
-    border-left:10px solid #f4a261;
-}
-
-.low{
-    border-left:10px solid #2a9d8f;
-}
 .deptEmoji{
 
     font-size:34px;
@@ -97,7 +89,9 @@ button:hover{
 
 .deptTitle{
 
-    font-size:22px;
+    font-size:20px;
+
+    line-height:1.2;
 
     font-weight:bold;
 
