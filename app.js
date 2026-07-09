@@ -142,6 +142,7 @@ if (!existing.empty) {
     return;
 }
 
+console.log(reportId);
 await addDoc(reportsRef, {
     reportId,
     uploadedAt: new Date().toISOString(),
