@@ -72,7 +72,7 @@ if (deptMatch) {
 
 // Detect POG changes
 if (text.startsWith("POG:")) {
-    currentPOG = items[i + 2]?.str || "";
+    currentPOG = `${items[i + 1]?.str || ""} ${items[i + 2]?.str || ""}`.trim();
     console.log("POG FOUND:", currentPOG);
     continue;
 }
