@@ -42,6 +42,9 @@ let currentPOG = "";
             for (let i = 0; i < items.length; i++) {
 
                 const text = items[i].str;
+                if (text.includes("POG")) {
+    console.log("FOUND TEXT:", text);
+}
 
 // Detect department changes anywhere on the page
 const deptMatch = text.match(/^(\d{3})-([A-Z& ]+)$/);
