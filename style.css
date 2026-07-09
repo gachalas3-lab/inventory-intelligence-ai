@@ -129,7 +129,7 @@ button:hover{
 
     align-items:center;
 
-    justify-content:space-between;
+    gap:30px;
 
     background:white;
 
@@ -157,9 +157,7 @@ button:hover{
 
 .priorityInfo{
 
-    flex:1;
-
-    padding-right:20px;
+    width:420px;
 
 }
 
@@ -185,7 +183,9 @@ button:hover{
 
 .priorityAvg{
 
-    text-align:right;
+    min-width:100px;
+
+    text-align:center;
 
 }
 
