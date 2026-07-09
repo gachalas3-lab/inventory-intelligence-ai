@@ -69,6 +69,7 @@ const pogMatch = text.match(/^POG:\d+\s+(.+)$/);
 
 if (pogMatch) {
     currentPOG = pogMatch[1].trim();
+    console.log("POG FOUND:", currentPOG);
     continue;
 }
 
@@ -101,6 +102,7 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
     }
 }
 
+console.log("Using POG:", currentPOG, "for", upc);
 products.push({
     department: currentDepartment,
     pog: currentPOG,
