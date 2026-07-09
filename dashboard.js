@@ -46,12 +46,39 @@ uniqueProducts.sort(
 // Take the top 20
 const top20 = uniqueProducts.slice(0, 20);
 
-// Display them
-document.getElementById("priorityList").innerHTML =
-    top20.map(p => `
-        <div style="margin-bottom:15px;">
-            <b>${p.name}</b><br>
-            ${p.department} | ${p.pog}<br>
-            Avg Sales: ${p.averageSales}
-        </div>
-    `).join("");
+const content = document.getElementById("content");
+
+// Show Highest Priority page
+function showPriority() {
+
+    content.innerHTML =
+        top20.map(p => `
+            <div style="margin-bottom:15px;">
+                <b>${p.name}</b><br>
+                ${p.department} | ${p.pog}<br>
+                Avg Sales: ${p.averageSales}
+            </div>
+        `).join("");
+
+}
+
+// Show Department page (placeholder for now)
+function showDepartments() {
+
+    content.innerHTML = `
+        <h2>Restocking Priority by Department</h2>
+
+        <p>Department buttons will go here.</p>
+    `;
+
+}
+
+// Button clicks
+document.getElementById("priorityBtn")
+    .addEventListener("click", showPriority);
+
+document.getElementById("departmentBtn")
+    .addEventListener("click", showDepartments);
+
+// Open on Highest Priority by default
+showPriority();
