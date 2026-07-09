@@ -291,3 +291,47 @@ button:hover{
     box-shadow:0 0 8px rgba(43,76,126,.2);
 
 }
+
+/* ---------- Navigation ---------- */
+
+.navbar{
+
+    display:flex;
+
+    gap:15px;
+
+    padding:20px;
+
+    background:white;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+
+    margin-bottom:25px;
+
+}
+
+.navbar button{
+
+    background:#2b4c7e;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:8px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.navbar button:hover{
+
+    background:#1f3658;
+
+}
