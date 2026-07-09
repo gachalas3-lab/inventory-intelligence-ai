@@ -38,3 +38,40 @@ button:hover{
     border-radius:5px;
     min-height:150px;
 }
+
+/* ---------------- Dashboard ---------------- */
+
+#content{
+    margin-top:30px;
+}
+
+.deptButton{
+    width:260px;
+    height:120px;
+
+    margin:15px;
+    padding:20px;
+
+    border:none;
+    border-radius:12px;
+
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+
+    color:#2b4c7e;
+    font-size:18px;
+    font-weight:bold;
+    text-align:left;
+
+    transition:.2s;
+}
+
+.deptButton:hover{
+    transform:translateY(-4px);
+    box-shadow:0 8px 18px rgba(0,0,0,.18);
+}
+
+#content h2{
+    color:#2b4c7e;
+    margin-bottom:20px;
+}
