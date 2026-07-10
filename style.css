@@ -42,7 +42,17 @@ button:hover{
 /* ---------------- Dashboard ---------------- */
 
 #content{
+
     margin-top:30px;
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    justify-content:center;
+
+    gap:20px;
+
 }
 
 .deptButton{
@@ -390,6 +400,18 @@ h1{
 }
 
 #content h2{
+
+    text-align:center;
+
+}
+#priorityBtn,
+#departmentBtn,
+#insightsBtn{
+
+    margin:10px;
+
+}
+body{
 
     text-align:center;
 
