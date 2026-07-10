@@ -392,25 +392,41 @@ function showInsights() {
 
     });
 
-    let highestDemandDepartment = "";
-    let highestAverage = 0;
+   let highestDemandDepartment = "";
 
-    Object.entries(departments).forEach(([name, products]) => {
+let highestScore = 0;
 
-        const average =
-            products.reduce(
-                (sum, p) => sum + Number(p.averageSales),
-                0
-            ) / products.length;
+let highestAverage = 0;
 
-        if (average > highestAverage) {
+Object.entries(departments).forEach(([name, products]) => {
 
-            highestAverage = average;
-            highestDemandDepartment = name;
+    const average =
+        products.reduce(
+            (sum, p) => sum + Number(p.averageSales),
+            0
+        ) / products.length;
 
-        }
+    const highDemandProducts =
+        products.filter(
+            product => Number(product.averageSales) >= 3
+        ).length;
 
-    });
+    const priorityScore =
+        (highDemandProducts * 2)
+        + average
+        + (products.length / 20);
+
+    if (priorityScore > highestScore) {
+
+        highestScore = priorityScore;
+
+        highestAverage = average;
+
+        highestDemandDepartment = name;
+
+    }
+
+});
 
     const largestDepartment =
         Object.entries(departments)
@@ -428,7 +444,11 @@ function showInsights() {
 
 <p><b>${highestDemandDepartment}</b></p>
 
-<p>Average Sales: ${highestAverage.toFixed(2)}</p>
+<p>
+
+Priority Score: ${highestScore.toFixed(1)}
+
+</p>
 
 </div>
 
