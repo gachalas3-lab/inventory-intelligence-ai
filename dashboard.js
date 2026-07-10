@@ -23,12 +23,7 @@ reports.forEach((report, index) => {
 reports.sort(
     (a, b) => new Date(b.uploadedAt) - new Date(a.uploadedAt)
 );
-const newestReport = reports[0];
 
-const date = new Date(newestReport.uploadedAt);
-
-lastUpdated.innerHTML =
-    `🕒 Last Updated: ${date.toLocaleString()}`;
 
 // Combine products from every report
 const products = reports.flatMap(report => report.products);
@@ -55,6 +50,12 @@ const top20 = uniqueProducts.slice(0, 20);
 const content = document.getElementById("content");
 const lastUpdated = document.getElementById("lastUpdated");
 console.log(content);
+const newestReport = reports[0];
+
+const date = new Date(newestReport.uploadedAt);
+
+lastUpdated.innerHTML =
+    `🕒 Last Updated: ${date.toLocaleString()}`;
 
 // Show Highest Priority page
 function showPriority() {
