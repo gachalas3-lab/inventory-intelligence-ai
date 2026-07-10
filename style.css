@@ -335,3 +335,26 @@ button:hover{
     background:#1f3658;
 
 }
+.insightCard{
+
+    background:white;
+
+    padding:22px;
+
+    border-radius:12px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+    margin-bottom:20px;
+
+    text-align:left;
+
+}
+
+.insightCard h3{
+
+    color:#2b4c7e;
+
+    margin-top:0;
+
+}

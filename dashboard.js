@@ -378,12 +378,114 @@ function getDepartmentPriority(products) {
 
     return "low";
 }
+function showInsights() {
+
+    const departments = {};
+
+    uniqueProducts.forEach(product => {
+
+        if (!departments[product.department]) {
+            departments[product.department] = [];
+        }
+
+        departments[product.department].push(product);
+
+    });
+
+    let highestDemandDepartment = "";
+    let highestAverage = 0;
+
+    Object.entries(departments).forEach(([name, products]) => {
+
+        const average =
+            products.reduce(
+                (sum, p) => sum + Number(p.averageSales),
+                0
+            ) / products.length;
+
+        if (average > highestAverage) {
+
+            highestAverage = average;
+            highestDemandDepartment = name;
+
+        }
+
+    });
+
+    const largestDepartment =
+        Object.entries(departments)
+            .sort((a,b)=>b[1].length-a[1].length)[0];
+
+    const highestProduct = uniqueProducts[0];
+
+    content.innerHTML = `
+
+<h2>🤖 AI Insights</h2>
+
+<div class="insightCard">
+
+<h3>🔥 Highest Demand Department</h3>
+
+<p><b>${highestDemandDepartment}</b></p>
+
+<p>Average Sales: ${highestAverage.toFixed(2)}</p>
+
+</div>
+
+<div class="insightCard">
+
+<h3>📦 Largest Department</h3>
+
+<p><b>${largestDepartment[0]}</b></p>
+
+<p>${largestDepartment[1].length} products</p>
+
+</div>
+
+<div class="insightCard">
+
+<h3>⭐ Highest Demand Product</h3>
+
+<p><b>${highestProduct.name}</b></p>
+
+<p>Average Sales: ${highestProduct.averageSales}</p>
+
+</div>
+
+<div class="insightCard">
+
+<h3>📊 Inventory Summary</h3>
+
+<p>${uniqueProducts.length} products currently tracked.</p>
+
+</div>
+
+<div class="insightCard">
+
+<h3>💡 Recommendation</h3>
+
+<p>
+
+Focus upcoming replenishment efforts on
+<b>${highestDemandDepartment}</b>.
+This department currently has the strongest overall demand,
+while <b>${highestProduct.name}</b> is your highest-selling product.
+
+</p>
+
+</div>
+
+`;
+
+}
 // Button clicks
 document.getElementById("priorityBtn")
     .addEventListener("click", showPriority);
 
 document.getElementById("departmentBtn")
     .addEventListener("click", showDepartments);
+    document.getElementById("insightsBtn")
+    .addEventListener("click", showInsights);
 
 // Open on Highest Priority by default
 showPriority();
