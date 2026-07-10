@@ -381,38 +381,16 @@ button:hover{
     font-size:15px;
 
 }
-h1{
+#lastUpdated{
 
-    text-align:center;
+    color:#666;
 
-}
+    margin-top:-18px;
 
-.navbar{
+    margin-bottom:30px;
 
-    display:flex;
-
-    justify-content:center;
-
-    gap:15px;
-
-    margin-bottom:25px;
+    font-size:15px;
 
 }
 
-#content h2{
 
-    text-align:center;
-
-}
-#priorityBtn,
-#departmentBtn,
-#insightsBtn{
-
-    margin:10px;
-
-}
-body{
-
-    text-align:center;
-
-}
