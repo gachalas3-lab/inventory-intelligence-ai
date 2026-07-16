@@ -109,7 +109,24 @@ if (text.startsWith("POG:")) {
 
                 if (!/^\d{12,13}$/.test(items[i].str)) continue;
                 console.log("----------");
-console.log("PRODUCT:", items[i + 2]?.str);
+if ((items[i + 2]?.str || "").includes("COCO")) {
+    console.log("----------");
+    console.log("PRODUCT:", items[i + 2]?.str);
+
+    for (let j = i; j < i + 35; j++) {
+        const currentItem = items[j];
+        if (!currentItem) continue;
+
+        console.log(
+            j - i,
+            `'${currentItem.str}'`,
+            "x:",
+            Math.round(currentItem.transform[4]),
+            "y:",
+            Math.round(currentItem.transform[5])
+        );
+    }
+}
 
 
 for (let j = i; j < i + 35; j++) {
