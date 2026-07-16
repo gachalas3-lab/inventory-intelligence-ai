@@ -110,8 +110,7 @@ let size = "";
 let averageSales = "";
 let shortQty = "";
 
-let size = "";
-let averageSales = "";
+
 
 for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
 
