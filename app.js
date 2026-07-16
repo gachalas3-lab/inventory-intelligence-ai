@@ -49,6 +49,11 @@ let currentPOG = "";
 
 
             const items = textContent.items;
+            const upcs = items
+    .filter(item => /^\d{12}$/.test(item.str))
+    .map(item => item.str);
+
+console.log("UPCs on page", page, upcs);
             console.log("PAGE", page);
 const allText = items.map(item => item.str).join("\n");
 console.log(allText);
