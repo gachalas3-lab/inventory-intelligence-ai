@@ -185,9 +185,15 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
     }
 
 
-    if (!shortQty && x > 740 && x < 765 && /^\d+$/.test(text)) {
-        shortQty = text;
+    if (!shortQty && x > 740 && x < 765) {
+
+    const match = text.match(/^(\d+)/);
+
+    if (match) {
+        shortQty = match[1];
     }
+
+}
 
 
     if (size && averageSales && shortQty) {
@@ -200,7 +206,8 @@ console.log("Using POG:", currentPOG, "for", upc);
 console.log({
     name,
     upc,
-    shortQty
+    shortQty,
+    keep: Number(shortQty) <= 0
 });
 
 // Skip products the warehouse couldn't supply
