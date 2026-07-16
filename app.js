@@ -181,6 +181,13 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
 
 console.log("Using POG:", currentPOG, "for", upc);
 console.log(name, "Short Qty =", shortQty);
+
+// Skip products the warehouse couldn't supply
+if (Number(shortQty) > 0) {
+    console.log("Skipping warehouse shortage:", name);
+    continue;
+}
+
 products.push({
     department: currentDepartment,
     pog: currentPOG,
