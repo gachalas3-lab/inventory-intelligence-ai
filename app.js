@@ -9,75 +9,71 @@ import {
 console.log("APP STARTED");
 const button = document.getElementById("analyzeBtn");
 
+
 button.addEventListener("click", async () => {
 
+
     const file = document.getElementById("pdfUpload").files[0];
+
 
     if (!file) {
         alert("Please choose a PDF first.");
         return;
     }
 
+
     const reader = new FileReader();
+
 
     reader.onload = async function () {
 
+
         const typedArray = new Uint8Array(this.result);
+
 
         const pdf = await pdfjsLib.getDocument({
             data: typedArray
         }).promise;
 
+
         let products = [];
 let currentDepartment = "";
 let currentPOG = "";
 
+
         for (let page = 1; page <= pdf.numPages; page++) {
+
 
             const pdfPage = await pdf.getPage(page);
             const textContent = await pdfPage.getTextContent();
 
+
             const items = textContent.items;
-            // ---------- Build rows ----------
-const rows = {};
-
-items.forEach(item => {
-
-    const y = Math.round(item.transform[5]);
-
-    if (!rows[y]) {
-        rows[y] = [];
-    }
-
-    rows[y].push(item);
-
-});
-
-// Sort each row left-to-right
-Object.values(rows).forEach(row => {
-
-    row.sort((a, b) => a.transform[4] - b.transform[4]);
-
-});
             console.log("PAGE", page);
 const allText = items.map(item => item.str).join("\n");
 console.log(allText);
 
-            
 
-            // Process each row
-for (const row of Object.values(rows)) {
+           
 
-                const text = row.map(item => item.str).join(" ");
+
+            // Look for every UPC
+            for (let i = 0; i < items.length; i++) {
+
+
+                const text = items[i].str;
                 if (text.includes("POG")) {
     console.log("FOUND TEXT:", text);
 }
 
+
 // Detect department changes anywhere on the page
 const deptMatch = text.match(/^(\d{3})-([A-Z& ]+)$/);
 
+
 if (deptMatch) {
     const deptCode = deptMatch[2].trim();
+
 
     const departmentNames = {
         HBA: "HEALTH & BEAUTY",
@@ -90,9 +86,13 @@ if (deptMatch) {
 
 
 
+
+
+
     currentDepartment = departmentNames[deptCode] || deptCode;
     continue;
 }
+
 
 // Detect POG changes
 if (text.startsWith("POG:")) {
@@ -101,15 +101,20 @@ if (text.startsWith("POG:")) {
     continue;
 }
 
+
                 if (!/^\d{12}$/.test(items[i].str)) continue;
                 console.log("----------");
 console.log("PRODUCT:", items[i + 2]?.str);
 
+
 for (let j = i; j < i + 35; j++) {
+
 
     const currentItem = items[j];
 
+
     if (!currentItem) continue;
+
 
     console.log(
         j - i,
@@ -120,12 +125,16 @@ for (let j = i; j < i + 35; j++) {
         Math.round(currentItem.transform[5])
     );
 
+
 }
 
+
                 const upc = items[i].str;
-                
+               
+
 
 const name = items[i + 2]?.str || "";
+
 
 let size = "";
 let averageSales = "";
@@ -133,28 +142,37 @@ let shortQty = "";
 
 
 
+
+
+
 for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
+
 
     const currentItem = items[j];
     const text = currentItem.str;
     const x = Math.round(currentItem.transform[4]);
 
+
     if (!size && /^\d+(\.\d+)?\s?(PK|ML|L)$/.test(text)) {
         size = text;
     }
+
 
     if (!averageSales && x > 650 && x < 680 && text.includes(".")) {
         averageSales = text;
     }
 
+
     if (!shortQty && x > 740 && x < 765 && /^\d+$/.test(text)) {
         shortQty = text;
     }
+
 
     if (size && averageSales && shortQty) {
         break;
     }
 }
+
 
 console.log("Using POG:", currentPOG, "for", upc);
 console.log(name, "Short Qty =", shortQty);
@@ -167,16 +185,22 @@ products.push({
     averageSales
 });
 
+
             }
+
 
         }
 
+
         console.log(products);
+
 
         // Create a unique ID for this report
 const reportId = file.name + "_" + products.length;
 
+
         const reportsRef = collection(db, "reports");
+
 
 /*
 const q = query(
@@ -184,13 +208,16 @@ const q = query(
     where("reportId", "==", reportId)
 );
 
+
 const existing = await getDocs(q);
+
 
 if (!existing.empty) {
     alert("This report has already been uploaded.");
     return;
 }
 */
+
 
 console.log(reportId);
 await addDoc(reportsRef, {
@@ -200,7 +227,9 @@ await addDoc(reportsRef, {
     products
 });
 
+
 console.log("✅ Report saved to Firebase!");
+
 
         document.getElementById("results").innerHTML =
             products.map(p => `
@@ -214,8 +243,11 @@ console.log("✅ Report saved to Firebase!");
                 </div>
             `).join("");
 
+
     };
 
+
     reader.readAsArrayBuffer(file);
+
 
 });
