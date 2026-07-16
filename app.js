@@ -108,27 +108,36 @@ const name = items[i + 2]?.str || "";
 
 let size = "";
 let averageSales = "";
+let shortQty = "";
+
+let size = "";
+let averageSales = "";
 
 for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
 
-    const text = items[j].str;
+    const currentItem = items[j];
+    const text = currentItem.str;
+    const x = Math.round(currentItem.transform[4]);
 
     if (!size && /^\d+(\.\d+)?\s?(PK|ML|L)$/.test(text)) {
         size = text;
     }
 
-    const num = Number(text);
-
-    if (!averageSales && !isNaN(num) && text.includes(".")) {
+    if (!averageSales && x > 650 && x < 680 && text.includes(".")) {
         averageSales = text;
     }
 
-    if (size && averageSales) {
+    if (!shortQty && x > 740 && x < 765 && /^\d+$/.test(text)) {
+        shortQty = text;
+    }
+
+    if (size && averageSales && shortQty) {
         break;
     }
 }
 
 console.log("Using POG:", currentPOG, "for", upc);
+console.log(name, "Short Qty =", shortQty);
 products.push({
     department: currentDepartment,
     pog: currentPOG,
