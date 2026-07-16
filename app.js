@@ -38,16 +38,37 @@ let currentPOG = "";
             const textContent = await pdfPage.getTextContent();
 
             const items = textContent.items;
+            // ---------- Build rows ----------
+const rows = {};
+
+items.forEach(item => {
+
+    const y = Math.round(item.transform[5]);
+
+    if (!rows[y]) {
+        rows[y] = [];
+    }
+
+    rows[y].push(item);
+
+});
+
+// Sort each row left-to-right
+Object.values(rows).forEach(row => {
+
+    row.sort((a, b) => a.transform[4] - b.transform[4]);
+
+});
             console.log("PAGE", page);
 const allText = items.map(item => item.str).join("\n");
 console.log(allText);
 
             
 
-            // Look for every UPC
-            for (let i = 0; i < items.length; i++) {
+            // Process each row
+for (const row of Object.values(rows)) {
 
-                const text = items[i].str;
+                const text = row.map(item => item.str).join(" ");
                 if (text.includes("POG")) {
     console.log("FOUND TEXT:", text);
 }
