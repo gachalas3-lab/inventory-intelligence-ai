@@ -81,6 +81,12 @@ if (text.startsWith("POG:")) {
 }
 
                 if (!/^\d{12}$/.test(items[i].str)) continue;
+                console.log("----------");
+console.log("PRODUCT:", items[i + 2]?.str);
+
+for (let j = i; j < i + 35; j++) {
+    console.log(j - i, items[j]?.str);
+}
 
                 const upc = items[i].str;
                 
@@ -130,6 +136,7 @@ const reportId = file.name + "_" + products.length;
 
         const reportsRef = collection(db, "reports");
 
+/*
 const q = query(
     reportsRef,
     where("reportId", "==", reportId)
@@ -141,6 +148,7 @@ if (!existing.empty) {
     alert("This report has already been uploaded.");
     return;
 }
+*/
 
 console.log(reportId);
 await addDoc(reportsRef, {
