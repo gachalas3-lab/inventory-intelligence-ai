@@ -85,7 +85,20 @@ if (text.startsWith("POG:")) {
 console.log("PRODUCT:", items[i + 2]?.str);
 
 for (let j = i; j < i + 35; j++) {
-    console.log(j - i, items[j]?.str);
+
+    const currentItem = items[j];
+
+    if (!currentItem) continue;
+
+    console.log(
+        j - i,
+        currentItem.str,
+        "x:",
+        Math.round(currentItem.transform[4]),
+        "y:",
+        Math.round(currentItem.transform[5])
+    );
+
 }
 
                 const upc = items[i].str;
