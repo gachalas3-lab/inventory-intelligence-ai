@@ -50,7 +50,7 @@ let currentPOG = "";
 
             const items = textContent.items;
             const upcs = items
-    .filter(item => /^\d{12}$/.test(item.str))
+    .filter(item => /^\d{12,13}$/.test(item.str))
     .map(item => item.str);
 
 console.log("UPCs on page", page, upcs);
@@ -107,7 +107,7 @@ if (text.startsWith("POG:")) {
 }
 
 
-                if (!/^\d{12}$/.test(items[i].str)) continue;
+                if (!/^\d{12,13}$/.test(items[i].str)) continue;
                 console.log("----------");
 console.log("PRODUCT:", items[i + 2]?.str);
 
