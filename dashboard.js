@@ -104,8 +104,12 @@ ${uniqueProducts
     <div class="priorityInfo">
 
         <div class="priorityName">
-            ${product.name}
-        </div>
+    ${product.name}
+</div>
+
+<div class="priorityUPC">
+    UPC: ${product.upc}
+</div>
 
         <div class="priorityDetails">
             📂 ${product.department} • 📍 ${product.pog}
@@ -269,12 +273,16 @@ function showDepartmentProducts(department) {
     <div class="departmentInfo">
 
         <div class="departmentName">
-            ${product.name}
-        </div>
+    ${product.name}
+</div>
 
-        <div class="departmentDetails">
-            📍 ${product.pog} • Avg Sales: <b>${product.averageSales}</b>
-        </div>
+<div class="departmentUPC">
+    UPC: ${product.upc}
+</div>
+
+<div class="departmentDetails">
+    📍 ${product.pog} • Avg Sales: <b>${product.averageSales}</b>
+</div>
 
     </div>
 

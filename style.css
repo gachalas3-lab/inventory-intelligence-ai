@@ -403,3 +403,10 @@ button:hover{
     margin-bottom:20px;
 
 }
+
+.departmentUPC,
+.priorityUPC {
+    font-size: 13px;
+    color: #666;
+    margin-top: 2px;
+}
