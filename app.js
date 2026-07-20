@@ -108,6 +108,13 @@ if (text.startsWith("POG:")) {
 
 
                 if (!/^\d{12,13}$/.test(items[i].str)) continue;
+                const upc = items[i].str;
+
+const name = items[i + 2]?.str || "";
+
+let size = "";
+let averageSales = "";
+let shortQty = "";
                 console.log("----------");
 if ((items[i + 2]?.str || "").includes("COCO")) {
     console.log("----------");
@@ -122,9 +129,6 @@ if ((items[i + 2]?.str || "").includes("COCO")) {
             `'${currentItem.str}'`,
             "x:",
             Math.round(currentItem.transform[4]),
-            if ((upc === "8886482911742") && x > 700) {
-    console.log("CHECK:", text, "x:", x);
-}
             "y:",
             Math.round(currentItem.transform[5])
         );
@@ -154,17 +158,7 @@ for (let j = i; j < i + 35; j++) {
 }
 
 
-                const upc = items[i].str;
-               
-
-
-const name = items[i + 2]?.str || "";
-
-
-let size = "";
-let averageSales = "";
-let shortQty = "";
-
+                
 
 
 
@@ -176,6 +170,9 @@ for (let j = i + 1; j < Math.min(i + 35, items.length); j++) {
     const currentItem = items[j];
     const text = currentItem.str;
     const x = Math.round(currentItem.transform[4]);
+    if ((upc === "8886482911742") && x > 700) {
+    console.log("CHECK:", text, "x:", x);
+}
 
 
     if (!size && /^\d+(\.\d+)?\s?(PK|ML|L)$/.test(text)) {
