@@ -279,6 +279,11 @@ function showDepartmentProducts(department) {
 <div class="departmentUPC">
     UPC: ${product.upc}
 </div>
+<button class="barcodeBtn" data-upc="${product.upc}">
+    📦 Show Barcode
+</button>
+
+<div class="barcodeContainer"></div>
 
 <div class="departmentDetails">
     📍 ${product.pog} • Avg Sales: <b>${product.averageSales}</b>
