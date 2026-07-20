@@ -319,7 +319,42 @@ searchBox.addEventListener("input", () => {
 
 });
 
+// ADD THIS RIGHT HERE ↓↓↓
+document.querySelectorAll(".barcodeBtn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const container = button.nextElementSibling;
+
+        if (container.innerHTML !== "") {
+            container.innerHTML = "";
+            button.textContent = "📦 Show Barcode";
+            return;
+        }
+
+        container.innerHTML = `<svg></svg>`;
+
+        JsBarcode(
+            container.querySelector("svg"),
+            button.dataset.upc,
+            {
+                format: "CODE128",
+                displayValue: true,
+                height: 60,
+                width: 2
+            }
+        );
+
+        button.textContent = "❌ Hide Barcode";
+
+    });
+
+});
+
+// Keep this closing brace
 }
+
+
 function getDepartmentEmoji(name) {
 
     switch (name) {
