@@ -94,7 +94,6 @@ ${uniqueProducts
         Number(sessionStorage.getItem("priorityLimit") || 50)
     )
     .map((product, index) => `
-
 <div class="priorityItem">
 
     <div class="priorityRank">
@@ -104,12 +103,18 @@ ${uniqueProducts
     <div class="priorityInfo">
 
         <div class="priorityName">
-    ${product.name}
-</div>
+            ${product.name}
+        </div>
 
-<div class="priorityUPC">
-    UPC: ${product.upc}
-</div>
+        <div class="priorityUPC">
+            UPC: ${product.upc}
+        </div>
+
+        <button class="barcodeBtn" data-upc="${product.upc}">
+            📦 Show Barcode
+        </button>
+
+        <div class="barcodeContainer"></div>
 
         <div class="priorityDetails">
             📂 ${product.department} • 📍 ${product.pog}
@@ -172,6 +177,37 @@ priorityLimit.addEventListener("change", () => {
     );
 
     showPriority();
+
+});
+
+document.querySelectorAll(".barcodeBtn").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        const container = button.nextElementSibling;
+
+        if (container.innerHTML !== "") {
+            container.innerHTML = "";
+            button.textContent = "📦 Show Barcode";
+            return;
+        }
+
+        container.innerHTML = `<svg></svg>`;
+
+        JsBarcode(
+            container.querySelector("svg"),
+            button.dataset.upc,
+            {
+                format: "CODE128",
+                displayValue: true,
+                height: 60,
+                width: 2
+            }
+        );
+
+        button.textContent = "❌ Hide Barcode";
+
+    });
 
 });
 
