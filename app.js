@@ -122,6 +122,9 @@ if ((items[i + 2]?.str || "").includes("COCO")) {
             `'${currentItem.str}'`,
             "x:",
             Math.round(currentItem.transform[4]),
+            if ((upc === "8886482911742") && x > 700) {
+    console.log("CHECK:", text, "x:", x);
+}
             "y:",
             Math.round(currentItem.transform[5])
         );
