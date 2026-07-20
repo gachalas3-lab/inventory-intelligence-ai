@@ -425,3 +425,33 @@ button:hover{
     color: #3b58a8;
     margin: 3px 0;
 }
+
+.priorityName {
+    margin-bottom: 6px;
+}
+
+.priorityUPC {
+    margin: 6px 0;
+}
+
+.barcodeBtn {
+    margin: 8px 0;
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    background: #f3f4f6;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.barcodeBtn:hover {
+    background: #e5e7eb;
+}
+
+.barcodeContainer {
+    margin: 10px 0 14px 0;
+}
+
+.priorityDetails {
+    margin-top: 8px;
+}
