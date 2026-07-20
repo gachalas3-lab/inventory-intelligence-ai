@@ -414,7 +414,7 @@ button:hover{
 .priorityUPC {
     font-size: 18px;
     font-weight: 700;
-    color: #1d4ed8;
+    color: #3f5caa;
     margin: 4px 0;
     letter-spacing: 0.5px;
 }
@@ -422,6 +422,6 @@ button:hover{
 .departmentUPC {
     font-size: 16px;
     font-weight: 700;
-    color: #1d4ed8;
+    color: #3b58a8;
     margin: 3px 0;
 }
