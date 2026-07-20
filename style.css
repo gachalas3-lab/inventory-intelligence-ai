@@ -410,3 +410,18 @@ button:hover{
     color: #666;
     margin-top: 2px;
 }
+
+.priorityUPC {
+    font-size: 18px;
+    font-weight: 700;
+    color: #1d4ed8;
+    margin: 4px 0;
+    letter-spacing: 0.5px;
+}
+
+.departmentUPC {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1d4ed8;
+    margin: 3px 0;
+}
