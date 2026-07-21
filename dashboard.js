@@ -308,36 +308,39 @@ function showDepartmentProducts(department) {
 
     <div class="departmentInfo">
 
+    <div class="departmentText">
+
         <div class="departmentName">
-    ${product.name}
-</div>
+            ${product.name}
+        </div>
 
-<div class="departmentUPC">
-    UPC: ${product.upc}
-</div>
-<button class="barcodeBtn" data-upc="${product.upc}">
-    📦 Show Barcode
-</button>
+        <div class="departmentUPC">
+            UPC: ${product.upc}
+        </div>
 
-<div class="barcodeContainer"></div>
+        <button class="barcodeBtn" data-upc="${product.upc}">
+            📦 Show Barcode
+        </button>
 
-<div class="departmentDetails">
-    📍 ${product.pog}
-</div>
+        <div class="barcodeContainer"></div>
 
-</div>
+        <div class="departmentDetails">
+            📍 ${product.pog}
+        </div>
 
-<div class="priorityAvg">
-
-    <div class="avgLabel">
-        Avg Sales
     </div>
 
-    <div class="avgNumber">
-        ${product.averageSales}
-    </div>
+    <div class="priorityAvg">
 
-</div>
+        <div class="avgLabel">
+            Avg Sales
+        </div>
+
+        <div class="avgNumber">
+            ${product.averageSales}
+        </div>
+
+    </div>
 
 </div>
 
