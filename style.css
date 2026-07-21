@@ -505,3 +505,7 @@ button:hover{
     font-size:16px;
     margin-bottom:25px;
 }
+.uploadStartBtn{
+    padding:12px 24px;
+    font-size:16px;
+}
