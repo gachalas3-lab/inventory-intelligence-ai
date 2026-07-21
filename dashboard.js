@@ -322,7 +322,14 @@ function showDepartmentProducts(department) {
 <div class="barcodeContainer"></div>
 
 <div class="departmentDetails">
-    📍 ${product.pog} • Avg Sales: <b>${product.averageSales}</b>
+    📍 ${product.pog}
+</div>
+
+<div class="departmentAvg">
+    Avg Sales
+    <div class="departmentAvgNumber">
+        ${product.averageSales}
+    </div>
 </div>
 
     </div>

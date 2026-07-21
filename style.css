@@ -455,3 +455,16 @@ button:hover{
 .priorityDetails {
     margin-top: 4px;
 }
+
+.departmentAvg {
+    margin-top: 8px;
+    text-align: center;
+    font-size: 13px;
+    color: #666;
+}
+
+.departmentAvgNumber {
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
+}
