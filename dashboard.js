@@ -2,7 +2,9 @@ import { db } from "./firebase.js";
 
 import {
     collection,
-    getDocs
+    getDocs,
+    deleteDoc,
+    doc
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // Get every report
@@ -608,13 +610,51 @@ while <b>${highestProduct.name}</b> is your highest-selling product.
 
 }
 
-function showReports() {
+async function showReports() {
+
+    const snapshot = await getDocs(collection(db, "reports"));
+
+    const reports = [];
+
+    snapshot.forEach(docSnap => {
+
+        reports.push({
+            id: docSnap.id,
+            ...docSnap.data()
+        });
+
+    });
 
     content.innerHTML = `
 
 <h2>🗄 Reports Database</h2>
 
-<p>Loading reports...</p>
+<h3>${reports.length} Reports Stored</h3>
+
+<button id="deleteAllBtn">
+    🗑 Clear Entire Database
+</button>
+
+<hr>
+
+${reports.map(report => `
+
+<div class="reportCard">
+
+    <b>${report.reportId}</b><br>
+
+    ${report.productCount} products
+
+    <br><br>
+
+    <button class="deleteReportBtn"
+        data-id="${report.id}">
+        🗑 Delete
+    </button>
+
+</div>
+
+`).join("")}
 
 `;
 
