@@ -552,7 +552,8 @@ Object.entries(departments).forEach(([name, products]) => {
         Object.entries(departments)
             .sort((a,b)=>b[1].length-a[1].length)[0];
 
-    const highestProduct = uniqueProducts[0];
+    const highestProduct =
+    uniqueProducts.length > 0 ? uniqueProducts[0] : null;
 
     content.innerHTML = `
 
@@ -586,9 +587,9 @@ Priority Score: ${highestScore.toFixed(1)}
 
 <h3>⭐ Highest Demand Product</h3>
 
-<p><b>${highestProduct.name}</b></p>
+<p><b>${highestProduct ? highestProduct.name : "No products"}</b></p>
 
-<p>Average Sales: ${highestProduct.averageSales}</p>
+<p>Average Sales: ${highestProduct ? highestProduct.averageSales : "-"}</p>
 
 </div>
 
@@ -609,7 +610,7 @@ Priority Score: ${highestScore.toFixed(1)}
 Focus upcoming replenishment efforts on
 <b>${highestDemandDepartment}</b>.
 This department currently has the strongest overall demand,
-while <b>${highestProduct.name}</b> is your highest-selling product.
+while <b>${highestProduct ? highestProduct.name : "no products are currently available"}</b> is your highest-selling product.
 
 </p>
 
@@ -718,5 +719,7 @@ document.getElementById("departmentBtn")
     document.getElementById("reportsBtn")
     .addEventListener("click", showReports);
 
-// Open on Highest Priority by default
-showPriority();
+// Only open Priority if reports exist
+if (reports.length > 0) {
+    showPriority();
+}
