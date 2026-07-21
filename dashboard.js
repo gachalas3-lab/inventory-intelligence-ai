@@ -680,6 +680,22 @@ document.querySelectorAll(".deleteReportBtn").forEach(button => {
 
 });
 
+document.getElementById("deleteAllBtn").addEventListener("click", async () => {
+
+    if (!confirm("Delete ALL reports?")) return;
+
+    const snapshot = await getDocs(collection(db, "reports"));
+
+    for (const report of snapshot.docs) {
+
+        await deleteDoc(report.ref);
+
+    }
+
+    showReports();
+
+});
+
 }
 
 // Button clicks
