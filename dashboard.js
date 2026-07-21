@@ -52,12 +52,21 @@ const top20 = uniqueProducts.slice(0, 20);
 const content = document.getElementById("content");
 const lastUpdated = document.getElementById("lastUpdated");
 console.log(content);
-const newestReport = reports[0];
+if (reports.length > 0) {
 
-const date = new Date(newestReport.uploadedAt);
+    const newestReport = reports[0];
 
-lastUpdated.innerHTML =
-    `🕒 Last Updated: ${date.toLocaleString()}`;
+    const date = new Date(newestReport.uploadedAt);
+
+    lastUpdated.innerHTML =
+        `🕒 Last Updated: ${date.toLocaleString()}`;
+
+} else {
+
+    lastUpdated.innerHTML =
+        "📄 No reports uploaded yet.";
+
+}
 
 // Show Highest Priority page
 function showPriority() {
