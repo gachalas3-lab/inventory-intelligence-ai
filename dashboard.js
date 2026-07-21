@@ -325,11 +325,16 @@ function showDepartmentProducts(department) {
     📍 ${product.pog}
 </div>
 
-<div class="departmentAvg">
-    Avg Sales
-    <div class="departmentAvgNumber">
+<div class="priorityAvg">
+
+    <div class="avgLabel">
+        Avg Sales
+    </div>
+
+    <div class="avgNumber">
         ${product.averageSales}
     </div>
+
 </div>
 
     </div>
