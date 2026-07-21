@@ -674,7 +674,7 @@ document.querySelectorAll(".deleteReportBtn").forEach(button => {
             doc(db, "reports", button.dataset.id)
         );
 
-        showReports();
+        location.reload();
 
     });
 
@@ -692,7 +692,7 @@ document.getElementById("deleteAllBtn").addEventListener("click", async () => {
 
     }
 
-    showReports();
+    location.reload();
 
 });
 
