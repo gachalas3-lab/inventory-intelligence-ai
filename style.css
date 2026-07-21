@@ -460,3 +460,11 @@ button:hover{
     margin-top: 4px;
 }
 
+.reportsHeader{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+#deleteAllBtn{
+    margin-top:12px;
+}

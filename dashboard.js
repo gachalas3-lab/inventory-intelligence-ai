@@ -627,13 +627,17 @@ async function showReports() {
 
     content.innerHTML = `
 
-<h2>🗄 Reports Database</h2>
+<div class="reportsHeader">
 
-<h3>${reports.length} Reports Stored</h3>
+    <h2>🗄 Reports Database</h2>
 
-<button id="deleteAllBtn">
-    🗑 Clear Entire Database
-</button>
+    <h3>${reports.length} Reports Stored</h3>
+
+    <button id="deleteAllBtn">
+        🗑 Clear Entire Database
+    </button>
+
+</div>
 
 <hr>
 
