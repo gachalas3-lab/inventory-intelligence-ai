@@ -325,6 +325,8 @@ function showDepartmentProducts(department) {
     📍 ${product.pog}
 </div>
 
+</div>
+
 <div class="priorityAvg">
 
     <div class="avgLabel">
@@ -336,8 +338,6 @@ function showDepartmentProducts(department) {
     </div>
 
 </div>
-
-    </div>
 
 </div>
 
