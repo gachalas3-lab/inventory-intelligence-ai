@@ -607,6 +607,19 @@ while <b>${highestProduct.name}</b> is your highest-selling product.
 `;
 
 }
+
+function showReports() {
+
+    content.innerHTML = `
+
+<h2>🗄 Reports Database</h2>
+
+<p>Loading reports...</p>
+
+`;
+
+}
+
 // Button clicks
 document.getElementById("priorityBtn")
     .addEventListener("click", showPriority);
@@ -615,6 +628,8 @@ document.getElementById("departmentBtn")
     .addEventListener("click", showDepartments);
     document.getElementById("insightsBtn")
     .addEventListener("click", showInsights);
+    document.getElementById("reportsBtn")
+    .addEventListener("click", showReports);
 
 // Open on Highest Priority by default
 showPriority();
