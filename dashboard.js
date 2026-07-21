@@ -664,6 +664,22 @@ ${reports.map(report => `
 
 `;
 
+document.querySelectorAll(".deleteReportBtn").forEach(button => {
+
+    button.addEventListener("click", async () => {
+
+        if (!confirm("Delete this report?")) return;
+
+        await deleteDoc(
+            doc(db, "reports", button.dataset.id)
+        );
+
+        showReports();
+
+    });
+
+});
+
 }
 
 // Button clicks
