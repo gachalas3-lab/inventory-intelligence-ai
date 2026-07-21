@@ -340,7 +340,9 @@ function showDepartmentProducts(department) {
             ${product.averageSales}
         </div>
 
-    </div>
+        </div>
+
+</div>
 
 </div>
 
