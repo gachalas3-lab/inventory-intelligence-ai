@@ -468,3 +468,24 @@ button:hover{
 #deleteAllBtn{
     margin-top:12px;
 }
+
+.reportCard{
+    text-align:center;
+    background:white;
+    padding:18px;
+    margin:15px auto;
+    border-radius:10px;
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    max-width:500px;
+}
+
+.reportName{
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.reportCount{
+    color:#666;
+    margin-bottom:12px;
+}

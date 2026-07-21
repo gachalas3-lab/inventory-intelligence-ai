@@ -634,7 +634,7 @@ async function showReports() {
     <h3>${reports.length} Reports Stored</h3>
 
     <button id="deleteAllBtn">
-        🗑 Clear Entire Database
+         Clear Entire Database
     </button>
 
 </div>
@@ -645,15 +645,17 @@ ${reports.map(report => `
 
 <div class="reportCard">
 
-    <b>${report.reportId}</b><br>
+    <div class="reportName">
+        ${report.reportId}
+    </div>
 
-    ${report.productCount} products
-
-    <br><br>
+    <div class="reportCount">
+        ${report.productCount} products
+    </div>
 
     <button class="deleteReportBtn"
         data-id="${report.id}">
-        🗑 Delete
+         Delete
     </button>
 
 </div>
