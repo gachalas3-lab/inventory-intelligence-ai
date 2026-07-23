@@ -33,22 +33,37 @@ const products = reports.flatMap(report => report.products);
 // Combine duplicate UPCs and count appearances
 const productMap = new Map();
 
-products.forEach(product => {
+reports.forEach(report => {
 
-    if (productMap.has(product.upc)) {
+    // Prevent counting the same product twice in one report
+    const seenInReport = new Set();
 
-        productMap.get(product.upc).reportCount += 1;
+    report.products.forEach(product => {
 
-    } else {
+        if (seenInReport.has(product.upc)) {
+            return;
+        }
 
-        productMap.set(product.upc, {
-            ...product,
-            reportCount: 1
-        });
+        seenInReport.add(product.upc);
 
-    }
+
+        if (productMap.has(product.upc)) {
+
+            productMap.get(product.upc).reportCount += 1;
+
+        } else {
+
+            productMap.set(product.upc, {
+                ...product,
+                reportCount: 1
+            });
+
+        }
+
+    });
 
 });
+
 
 const uniqueProducts = Array.from(productMap.values());
 
@@ -120,7 +135,7 @@ function showPriority() {
 <div class="sortButtons">
 
 <button id="salesSort">
-🔥 Weekly Sales
+🔥 Average Sales
 </button>
 
 <button id="frequencySort">
