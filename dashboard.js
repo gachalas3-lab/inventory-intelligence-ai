@@ -59,6 +59,7 @@ uniqueProducts.sort(
 
 // Take the top 20
 const top20 = uniqueProducts.slice(0, 20);
+let currentSort = "sales";
 
 const content = document.getElementById("content");
 const lastUpdated = document.getElementById("lastUpdated");
@@ -79,12 +80,54 @@ if (reports.length > 0) {
 
 }
 
+function getSortedProducts(){
+
+    let sorted = [...uniqueProducts];
+
+
+    if(currentSort === "sales"){
+
+        sorted.sort(
+            (a,b) =>
+            Number(b.averageSales) -
+            Number(a.averageSales)
+        );
+
+    }
+
+
+    if(currentSort === "frequency"){
+
+        sorted.sort(
+            (a,b) =>
+            Number(b.reportCount) -
+            Number(a.reportCount)
+        );
+
+    }
+
+
+    return sorted;
+
+}
+
 // Show Highest Priority page
 function showPriority() {
 
     content.innerHTML = `
 
 <h2>Highest Priority Reorders</h2>
+<div class="sortButtons">
+
+<button id="salesSort">
+🔥 Weekly Sales
+</button>
+
+<button id="frequencySort">
+📊 Report Frequency
+</button>
+
+</div>
 
 <input
     id="prioritySearch"
@@ -110,7 +153,7 @@ function showPriority() {
 
 <div class="priorityList">
 
-${uniqueProducts
+${getSortedProducts()
     .slice(
         0,
         Number(sessionStorage.getItem("priorityLimit") || 50)
@@ -196,6 +239,23 @@ prioritySearch.addEventListener("input", () => {
         }
 
     });
+
+});
+
+document.getElementById("salesSort")
+.addEventListener("click",()=>{
+
+    currentSort = "sales";
+    showPriority();
+
+});
+
+
+document.getElementById("frequencySort")
+.addEventListener("click",()=>{
+
+    currentSort = "frequency";
+    showPriority();
 
 });
 
