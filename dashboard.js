@@ -30,16 +30,27 @@ reports.sort(
 // Combine products from every report
 const products = reports.flatMap(report => report.products);
 
-// Remove duplicate UPCs
-const seen = new Set();
+// Combine duplicate UPCs and count appearances
+const productMap = new Map();
 
-const uniqueProducts = products.filter(product => {
-    if (seen.has(product.upc)) {
-        return false;
+products.forEach(product => {
+
+    if (productMap.has(product.upc)) {
+
+        productMap.get(product.upc).reportCount += 1;
+
+    } else {
+
+        productMap.set(product.upc, {
+            ...product,
+            reportCount: 1
+        });
+
     }
-    seen.add(product.upc);
-    return true;
+
 });
+
+const uniqueProducts = Array.from(productMap.values());
 
 // Sort highest average sales first
 uniqueProducts.sort(
@@ -131,13 +142,30 @@ ${uniqueProducts
 
     <div class="priorityAvg">
 
-        <div class="avgLabel">
-            Avg Sales
-        </div>
+        <div class="priorityMetric">
 
-        <div class="avgNumber">
-            ${product.averageSales}
-        </div>
+    <div class="avgLabel">
+        Avg Sales
+    </div>
+
+    <div class="avgNumber">
+        ${product.averageSales}
+    </div>
+
+</div>
+
+
+<div class="priorityMetric">
+
+    <div class="avgLabel">
+        Reports Found
+    </div>
+
+    <div class="avgNumber">
+        ${product.reportCount}
+    </div>
+
+</div>
 
     </div>
 
