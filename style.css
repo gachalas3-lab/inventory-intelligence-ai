@@ -438,19 +438,7 @@ button:hover{
     margin: 3px 0;
 }
 
-.barcodeBtn {
-    margin: 4px 0;
-    padding: 5px 10px;
-    border: none;
-    border-radius: 8px;
-    background: #5175be;
-    cursor: pointer;
-    font-size: 14px;
-}
 
-.barcodeBtn:hover {
-    background: #2a3d63;
-}
 
 .barcodeContainer {
     margin: 5px 0 6px;
@@ -475,7 +463,7 @@ button:hover{
     padding:18px;
     margin:15px auto;
     border-radius:10px;
-    box-shadow:0 2px 8px rgba(0,0,0,.08);
+    box-shadow:0 2px 8px rgba(235, 138, 138, 0.08);
     max-width:500px;
 }
 

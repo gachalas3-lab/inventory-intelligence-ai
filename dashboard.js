@@ -121,11 +121,7 @@ ${uniqueProducts
             UPC: ${product.upc}
         </div>
 
-        <button class="barcodeBtn" data-upc="${product.upc}">
-            📦 Show Barcode
-        </button>
-
-        <div class="barcodeContainer"></div>
+        <div class="barcodeContainer" data-upc="${product.upc}"></div>
 
         <div class="priorityDetails">
             📂 ${product.department} • 📍 ${product.pog}
@@ -191,34 +187,20 @@ priorityLimit.addEventListener("change", () => {
 
 });
 
-document.querySelectorAll(".barcodeBtn").forEach(button => {
+document.querySelectorAll(".barcodeContainer").forEach(container => {
 
-    button.addEventListener("click", () => {
+    container.innerHTML = `<svg></svg>`;
 
-        const container = button.nextElementSibling;
-
-        if (container.innerHTML !== "") {
-            container.innerHTML = "";
-            button.textContent = "📦 Show Barcode";
-            return;
+    JsBarcode(
+        container.querySelector("svg"),
+        container.dataset.upc,
+        {
+            format: "CODE128",
+            displayValue: true,
+            height: 60,
+            width: 2
         }
-
-        container.innerHTML = `<svg></svg>`;
-
-        JsBarcode(
-            container.querySelector("svg"),
-            button.dataset.upc,
-            {
-                format: "CODE128",
-                displayValue: true,
-                height: 60,
-                width: 2
-            }
-        );
-
-        button.textContent = "❌ Hide Barcode";
-
-    });
+    );
 
 });
 
@@ -329,11 +311,7 @@ function showDepartmentProducts(department) {
             UPC: ${product.upc}
         </div>
 
-        <button class="barcodeBtn" data-upc="${product.upc}">
-            📦 Show Barcode
-        </button>
-
-        <div class="barcodeContainer"></div>
+        <div class="barcodeContainer" data-upc="${product.upc}"></div>
 
         <div class="departmentDetails">
             📍 ${product.pog}
@@ -384,34 +362,21 @@ searchBox.addEventListener("input", () => {
 });
 
 // ADD THIS RIGHT HERE ↓↓↓
-document.querySelectorAll(".barcodeBtn").forEach(button => {
 
-    button.addEventListener("click", () => {
+document.querySelectorAll(".barcodeContainer").forEach(container => {
 
-        const container = button.nextElementSibling;
+    container.innerHTML = `<svg></svg>`;
 
-        if (container.innerHTML !== "") {
-            container.innerHTML = "";
-            button.textContent = "📦 Show Barcode";
-            return;
+    JsBarcode(
+        container.querySelector("svg"),
+        container.dataset.upc,
+        {
+            format: "CODE128",
+            displayValue: true,
+            height: 60,
+            width: 2
         }
-
-        container.innerHTML = `<svg></svg>`;
-
-        JsBarcode(
-            container.querySelector("svg"),
-            button.dataset.upc,
-            {
-                format: "CODE128",
-                displayValue: true,
-                height: 60,
-                width: 2
-            }
-        );
-
-        button.textContent = "❌ Hide Barcode";
-
-    });
+    );
 
 });
 
