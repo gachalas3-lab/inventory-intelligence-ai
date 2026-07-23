@@ -75,6 +75,7 @@ uniqueProducts.sort(
 // Take the top 20
 const top20 = uniqueProducts.slice(0, 20);
 let currentSort = "sales";
+let departmentSort = "sales";
 
 const content = document.getElementById("content");
 const lastUpdated = document.getElementById("lastUpdated");
@@ -135,11 +136,11 @@ function showPriority() {
 <div class="sortButtons">
 
 <button id="salesSort">
-🔥 Average Sales
+ Average Sales
 </button>
 
 <button id="frequencySort">
-📊 Report Frequency
+ Report Frequency
 </button>
 
 </div>
@@ -379,19 +380,49 @@ function showDepartmentProducts(department) {
         product => product.department === department
     );
 
+    if (departmentSort === "sales") {
+
     departmentProducts.sort(
-        (a, b) => Number(b.averageSales) - Number(a.averageSales)
+        (a, b) =>
+        Number(b.averageSales) -
+        Number(a.averageSales)
     );
+
+}
+
+
+if (departmentSort === "frequency") {
+
+    departmentProducts.sort(
+        (a, b) =>
+        Number(b.reportCount) -
+        Number(a.reportCount)
+    );
+
+}
 
     content.innerHTML = `
         <button id="backBtn">⬅ Back</button>
 
 <h2>${department}</h2>
 
+<div class="sortButtons">
+
+<button id="deptSalesSort">
+ Average Sales
+</button>
+
+<button id="deptFrequencySort">
+ Report Frequency
+</button>
+
+</div>
+
 <input
     id="searchBox"
     type="text"
     placeholder="🔍 Search products..."
+>
 >
 
         ${departmentProducts.map((product, index) => `
@@ -443,6 +474,22 @@ function showDepartmentProducts(department) {
 
     document.getElementById("backBtn")
         .addEventListener("click", showDepartments);
+        document.getElementById("deptSalesSort")
+.addEventListener("click",()=>{
+
+    departmentSort = "sales";
+    showDepartmentProducts(department);
+
+});
+
+
+document.getElementById("deptFrequencySort")
+.addEventListener("click",()=>{
+
+    departmentSort = "frequency";
+    showDepartmentProducts(department);
+
+});
         const searchBox = document.getElementById("searchBox");
 
 searchBox.addEventListener("input", () => {
