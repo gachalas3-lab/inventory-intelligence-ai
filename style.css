@@ -508,3 +508,10 @@ button:hover{
     margin-bottom:20px;
 
 }
+
+.sortButtons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-bottom:20px;
+}
