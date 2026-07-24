@@ -242,7 +242,7 @@ const reportId = file.name + "_" + products.length;
         const reportsRef = collection(db, "reports");
 
 
-/*
+
 const q = query(
     reportsRef,
     where("reportId", "==", reportId)
@@ -256,7 +256,7 @@ if (!existing.empty) {
     alert("This report has already been uploaded.");
     return;
 }
-*/
+
 
 
 console.log(reportId);
