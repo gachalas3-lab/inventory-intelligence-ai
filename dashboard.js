@@ -423,7 +423,7 @@ if (departmentSort === "frequency") {
     type="text"
     placeholder="🔍 Search products..."
 >
->
+
 
         ${departmentProducts.map((product, index) => `
 
