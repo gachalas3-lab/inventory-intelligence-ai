@@ -455,6 +455,8 @@ if (departmentSort === "frequency") {
 
     <div class="priorityAvg">
 
+    <div class="priorityMetric">
+
         <div class="avgLabel">
             Avg Sales
         </div>
@@ -463,7 +465,21 @@ if (departmentSort === "frequency") {
             ${product.averageSales}
         </div>
 
+    </div>
+
+    <div class="priorityMetric">
+
+        <div class="avgLabel">
+            Reports Found
         </div>
+
+        <div class="avgNumber">
+            ${product.reportCount}
+        </div>
+
+    </div>
+
+</div>
 
 </div>
 
