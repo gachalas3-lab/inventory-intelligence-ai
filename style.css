@@ -78,6 +78,7 @@ button:hover{
 #content h2{
     color:#2b4c7e;
     margin-bottom:20px;
+    text-align:center;
 }
 
 
@@ -513,7 +514,7 @@ button:hover{
 
 .sortButtons{
     display:flex;
-    flex-wrap:wrap;
+    justify-content:center;
     gap:12px;
     margin-bottom:20px;
 }
@@ -550,4 +551,12 @@ button:hover{
 .priorityAvg{
     min-width:100px;
     text-align:center;
+}
+
+.priorityControls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
 }

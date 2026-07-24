@@ -151,21 +151,21 @@ function showPriority() {
     placeholder="🔍 Search priority reorders..."
 >
 
-<label><b>Show:</b></label>
+<div class="priorityControls">
 
-<select id="priorityLimit">
+    <label><b>Show:</b></label>
 
-    <option value="10">Top 10</option>
+    <select id="priorityLimit">
 
-    <option value="25">Top 25</option>
+        <option value="10">Top 10</option>
+        <option value="25">Top 25</option>
+        <option value="50" selected>Top 50</option>
+        <option value="100">Top 100</option>
+        <option value="99999">Show All</option>
 
-    <option value="50" selected>Top 50</option>
+    </select>
 
-    <option value="100">Top 100</option>
-
-    <option value="99999">Show All</option>
-
-</select>
+</div>
 
 <div class="priorityList">
 
