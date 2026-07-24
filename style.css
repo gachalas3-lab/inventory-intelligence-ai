@@ -215,7 +215,7 @@ button:hover{
 
     display:flex;
 
-    align-items:center;
+    align-items:flex-start;
 
     gap:20px;
 
@@ -551,7 +551,12 @@ button:hover{
     max-width:250px;
 }
 
-.priorityAvg {
-    width:120px;
+.priorityAvg{
+
+    width:140px;
+
     text-align:center;
+
+    margin-left:60px;
+
 }
