@@ -251,6 +251,8 @@ button:hover{
 
     align-items:center;
 
+    justify-content:space-between;
+
     gap:18px;
 
     min-width:0;
@@ -524,6 +526,32 @@ button:hover{
 
     width:420px;
 
-    flex-shrink:0;
+    flex-shrink:0; 
 
+}
+
+.departmentInfo {
+    display:grid;
+    grid-template-columns: 500px 120px;
+    align-items:center;
+    gap:20px;
+}
+
+.departmentText {
+    width:500px;
+    overflow:hidden;
+}
+
+.departmentText .barcodeContainer {
+    height:65px;
+    overflow:hidden;
+}
+
+.departmentText svg {
+    max-width:250px;
+}
+
+.priorityAvg {
+    width:120px;
+    text-align:center;
 }
