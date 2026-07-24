@@ -672,7 +672,7 @@ Object.entries(departments).forEach(([name, products]) => {
 
     content.innerHTML = `
 
-<h2>🤖 AI Insights</h2>
+<h2>💡 Insights</h2>
 
 <div class="insightCard">
 
