@@ -513,10 +513,17 @@ button:hover{
 }
 
 .sortButtons{
+
     display:flex;
+
     justify-content:center;
+
+    align-items:center;
+
     gap:12px;
-    margin-bottom:20px;
+
+    margin:20px 0;
+
 }
 
 .departmentText{
@@ -559,4 +566,32 @@ button:hover{
     align-items:center;
     gap:10px;
     margin-bottom:20px;
+}
+
+.departmentHeader{
+
+    position:relative;
+
+    margin-bottom:20px;
+
+}
+
+.departmentHeader h2{
+
+    text-align:center;
+
+    margin:0;
+
+}
+
+#backBtn{
+
+    position:absolute;
+
+    left:0;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
 }

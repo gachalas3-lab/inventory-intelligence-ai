@@ -402,19 +402,23 @@ if (departmentSort === "frequency") {
 }
 
     content.innerHTML = `
-        <button id="backBtn">⬅ Back</button>
+        <div class="departmentHeader">
 
-<h2>${department}</h2>
+    <button id="backBtn">⬅ Back</button>
+
+    <h2>${department}</h2>
+
+</div>
 
 <div class="sortButtons">
 
-<button id="deptSalesSort">
- Average Sales
-</button>
+    <button id="deptSalesSort">
+        Average Sales
+    </button>
 
-<button id="deptFrequencySort">
- Report Frequency
-</button>
+    <button id="deptFrequencySort">
+        Report Frequency
+    </button>
 
 </div>
 
