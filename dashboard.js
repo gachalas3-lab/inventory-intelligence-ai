@@ -130,8 +130,10 @@ function getSortedProducts(){
 // Show Highest Priority page
 function showPriority() {
 
-    const selectedDepartment =
-        sessionStorage.getItem("priorityDepartment") || "all";
+    const savedDepartments =
+        JSON.parse(
+            sessionStorage.getItem("priorityDepartments") || "[]"
+        );
 
     content.innerHTML = `
 
@@ -139,13 +141,13 @@ function showPriority() {
 
 <div class="sortButtons">
 
-    <button id="salesSort">
-        Average Sales
-    </button>
+<button id="salesSort">
+ Average Sales
+</button>
 
-    <button id="frequencySort">
-        Report Frequency
-    </button>
+<button id="frequencySort">
+ Report Frequency
+</button>
 
 </div>
 
@@ -157,11 +159,9 @@ function showPriority() {
 
 <div class="priorityControls">
 
-    <label><b>Department:</b></label>
+    <label><b>Departments:</b></label>
 
-    <select id="priorityDepartment">
-
-        <option value="all">All Departments</option>
+    <select id="priorityDepartments" multiple size="4">
 
         ${[...new Set(
             uniqueProducts
@@ -196,14 +196,15 @@ function showPriority() {
 
 ${getSortedProducts()
     .filter(product =>
-        selectedDepartment === "all" ||
-        product.department === selectedDepartment
+        savedDepartments.length === 0 ||
+        savedDepartments.includes(product.department)
     )
     .slice(
         0,
         Number(sessionStorage.getItem("priorityLimit") || 50)
     )
     .map((product, index) => `
+
 <div class="priorityItem">
 
     <div class="priorityRank">
@@ -267,6 +268,7 @@ ${getSortedProducts()
 
 `;
 
+    // Search
     const prioritySearch =
         document.getElementById("prioritySearch");
 
@@ -275,8 +277,7 @@ ${getSortedProducts()
         const search =
             prioritySearch.value.toLowerCase();
 
-        document
-            .querySelectorAll(".priorityItem")
+        document.querySelectorAll(".priorityItem")
             .forEach(item => {
 
                 const text =
@@ -289,8 +290,8 @@ ${getSortedProducts()
 
     });
 
-    document
-        .getElementById("salesSort")
+    // Sort by Average Sales
+    document.getElementById("salesSort")
         .addEventListener("click", () => {
 
             currentSort = "sales";
@@ -298,8 +299,8 @@ ${getSortedProducts()
 
         });
 
-    document
-        .getElementById("frequencySort")
+    // Sort by Report Frequency
+    document.getElementById("frequencySort")
         .addEventListener("click", () => {
 
             currentSort = "frequency";
@@ -307,17 +308,26 @@ ${getSortedProducts()
 
         });
 
-    // Department filter
+    // Department multi-select
     const departmentSelect =
-        document.getElementById("priorityDepartment");
+        document.getElementById("priorityDepartments");
 
-    departmentSelect.value = selectedDepartment;
+    [...departmentSelect.options].forEach(option => {
+
+        option.selected =
+            savedDepartments.includes(option.value);
+
+    });
 
     departmentSelect.addEventListener("change", () => {
 
+        const selectedDepartments =
+            [...departmentSelect.selectedOptions]
+                .map(option => option.value);
+
         sessionStorage.setItem(
-            "priorityDepartment",
-            departmentSelect.value
+            "priorityDepartments",
+            JSON.stringify(selectedDepartments)
         );
 
         showPriority();
@@ -343,8 +353,7 @@ ${getSortedProducts()
     });
 
     // Automatically show barcodes
-    document
-        .querySelectorAll(".barcodeContainer")
+    document.querySelectorAll(".barcodeContainer")
         .forEach(container => {
 
             container.innerHTML = `<svg></svg>`;
