@@ -130,18 +130,22 @@ function getSortedProducts(){
 // Show Highest Priority page
 function showPriority() {
 
+    const selectedDepartment =
+        sessionStorage.getItem("priorityDepartment") || "all";
+
     content.innerHTML = `
 
 <h2>Highest Priority Reorders</h2>
+
 <div class="sortButtons">
 
-<button id="salesSort">
- Average Sales
-</button>
+    <button id="salesSort">
+        Average Sales
+    </button>
 
-<button id="frequencySort">
- Report Frequency
-</button>
+    <button id="frequencySort">
+        Report Frequency
+    </button>
 
 </div>
 
@@ -153,13 +157,34 @@ function showPriority() {
 
 <div class="priorityControls">
 
+    <label><b>Department:</b></label>
+
+    <select id="priorityDepartment">
+
+        <option value="all">All Departments</option>
+
+        ${[...new Set(
+            uniqueProducts
+                .map(product => product.department)
+                .filter(department => department)
+        )]
+        .sort()
+        .map(department => `
+            <option value="${department}">
+                ${department}
+            </option>
+        `)
+        .join("")}
+
+    </select>
+
     <label><b>Show:</b></label>
 
     <select id="priorityLimit">
 
         <option value="10">Top 10</option>
         <option value="25">Top 25</option>
-        <option value="50" selected>Top 50</option>
+        <option value="50">Top 50</option>
         <option value="100">Top 100</option>
         <option value="99999">Show All</option>
 
@@ -170,6 +195,10 @@ function showPriority() {
 <div class="priorityList">
 
 ${getSortedProducts()
+    .filter(product =>
+        selectedDepartment === "all" ||
+        product.department === selectedDepartment
+    )
     .slice(
         0,
         Number(sessionStorage.getItem("priorityLimit") || 50)
@@ -191,7 +220,10 @@ ${getSortedProducts()
             UPC: ${product.upc}
         </div>
 
-        <div class="barcodeContainer" data-upc="${product.upc}"></div>
+        <div
+            class="barcodeContainer"
+            data-upc="${product.upc}">
+        </div>
 
         <div class="priorityDetails">
             📂 ${product.department} • 📍 ${product.pog}
@@ -203,28 +235,27 @@ ${getSortedProducts()
 
         <div class="priorityMetric">
 
-    <div class="avgLabel">
-        Avg Sales
-    </div>
+            <div class="avgLabel">
+                Avg Sales
+            </div>
 
-    <div class="avgNumber">
-        ${product.averageSales}
-    </div>
+            <div class="avgNumber">
+                ${product.averageSales}
+            </div>
 
-</div>
+        </div>
 
+        <div class="priorityMetric">
 
-<div class="priorityMetric">
+            <div class="avgLabel">
+                Reports Found
+            </div>
 
-    <div class="avgLabel">
-        Reports Found
-    </div>
+            <div class="avgNumber">
+                ${product.reportCount}
+            </div>
 
-    <div class="avgNumber">
-        ${product.reportCount}
-    </div>
-
-</div>
+        </div>
 
     </div>
 
@@ -236,142 +267,100 @@ ${getSortedProducts()
 
 `;
 
+    const prioritySearch =
+        document.getElementById("prioritySearch");
 
-const prioritySearch = document.getElementById("prioritySearch");
+    prioritySearch.addEventListener("input", () => {
 
-prioritySearch.addEventListener("input", () => {
+        const search =
+            prioritySearch.value.toLowerCase();
 
-    const search = prioritySearch.value.toLowerCase();
+        document
+            .querySelectorAll(".priorityItem")
+            .forEach(item => {
 
-    document.querySelectorAll(".priorityItem").forEach(item => {
+                const text =
+                    item.innerText.toLowerCase();
 
-        const text = item.innerText.toLowerCase();
+                item.style.display =
+                    text.includes(search) ? "" : "none";
 
-        if (text.includes(search)) {
-            item.style.display = "";
-        }
-        else {
-            item.style.display = "none";
-        }
-
-    });
-
-});
-
-document.getElementById("salesSort")
-.addEventListener("click",()=>{
-
-    currentSort = "sales";
-    showPriority();
-
-});
-
-
-document.getElementById("frequencySort")
-.addEventListener("click",()=>{
-
-    currentSort = "frequency";
-    showPriority();
-
-});
-
-const priorityLimit = document.getElementById("priorityLimit");
-
-priorityLimit.value =
-    sessionStorage.getItem("priorityLimit") || "50";
-
-priorityLimit.addEventListener("change", () => {
-
-    sessionStorage.setItem(
-        "priorityLimit",
-        priorityLimit.value
-    );
-
-    showPriority();
-
-});
-
-document.querySelectorAll(".barcodeContainer").forEach(container => {
-
-    container.innerHTML = `<svg></svg>`;
-
-    JsBarcode(
-        container.querySelector("svg"),
-        container.dataset.upc,
-        {
-            format: "CODE128",
-            displayValue: true,
-            height: 60,
-            width: 2
-        }
-    );
-
-});
-
-}
-
-// Show Department page (placeholder for now)
-function showDepartments() {
-
-    // Count products in each department
-    const departments = {};
-
-    uniqueProducts.forEach(product => {
-
-        if (!departments[product.department]) {
-            departments[product.department] = [];
-        }
-
-        departments[product.department].push(product);
+            });
 
     });
 
-    // Build buttons
-    content.innerHTML = `
-        <h2>Department Overview</h2>
+    document
+        .getElementById("salesSort")
+        .addEventListener("click", () => {
 
-        ${Object.entries(departments)
-            .sort((a, b) => b[1].length - a[1].length)
-            .map(([name, products]) => {
+            currentSort = "sales";
+            showPriority();
 
-    const avgDemand =
-        products.reduce(
-            (sum, p) => sum + Number(p.averageSales),
-            0
-        ) / products.length;
+        });
 
-    return `
-        <button class="deptButton" data-dept="${name}">
+    document
+        .getElementById("frequencySort")
+        .addEventListener("click", () => {
 
-            <div class="deptEmoji">${getDepartmentEmoji(name)}</div>
+            currentSort = "frequency";
+            showPriority();
 
-            <div class="deptTitle">${name}</div>
+        });
 
-            <div class="deptDemand">
-                Avg Demand: ${avgDemand.toFixed(2)}
-            </div>
+    // Department filter
+    const departmentSelect =
+        document.getElementById("priorityDepartment");
 
-            <div class="deptCount">
-                ${products.length} products to review
-            </div>
+    departmentSelect.value = selectedDepartment;
 
-        </button>
-    `;
+    departmentSelect.addEventListener("change", () => {
 
-})
-            .join("")}
-    `;
-    document.querySelectorAll(".deptButton").forEach(button => {
+        sessionStorage.setItem(
+            "priorityDepartment",
+            departmentSelect.value
+        );
 
-    button.addEventListener("click", () => {
-
-        const department = button.dataset.dept;
-
-        showDepartmentProducts(department);
+        showPriority();
 
     });
 
-});
+    // Top X
+    const priorityLimit =
+        document.getElementById("priorityLimit");
+
+    priorityLimit.value =
+        sessionStorage.getItem("priorityLimit") || "50";
+
+    priorityLimit.addEventListener("change", () => {
+
+        sessionStorage.setItem(
+            "priorityLimit",
+            priorityLimit.value
+        );
+
+        showPriority();
+
+    });
+
+    // Automatically show barcodes
+    document
+        .querySelectorAll(".barcodeContainer")
+        .forEach(container => {
+
+            container.innerHTML = `<svg></svg>`;
+
+            JsBarcode(
+                container.querySelector("svg"),
+                container.dataset.upc,
+                {
+                    format: "CODE128",
+                    displayValue: true,
+                    height: 60,
+                    width: 2
+                }
+            );
+
+        });
 
 }
 function showDepartmentProducts(department) {
