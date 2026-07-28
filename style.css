@@ -599,7 +599,7 @@ button:hover{
 .priorityControls {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 20px;
     flex-wrap: wrap;
 }
@@ -609,4 +609,8 @@ button:hover{
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 15px;
+}
+
+#priorityDepartments {
+    min-width: 180px;
 }
