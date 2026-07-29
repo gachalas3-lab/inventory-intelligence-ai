@@ -171,7 +171,7 @@ function showPriority() {
                         type="checkbox"
                         class="departmentCheckbox"
                         value="${department}"
-                        checked
+                         ${selectedDepartments.has(department) ? "checked" : ""}
                     >
 
                     ${department}
