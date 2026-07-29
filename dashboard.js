@@ -76,6 +76,9 @@ uniqueProducts.sort(
 const top20 = uniqueProducts.slice(0, 20);
 let currentSort = "sales";
 let departmentSort = "sales";
+let selectedDepartments = new Set(
+    uniqueProducts.map(product => product.department)
+);
 
 const content = document.getElementById("content");
 const lastUpdated = document.getElementById("lastUpdated");
@@ -127,13 +130,6 @@ function getSortedProducts(){
 
 }
 
-function getSelectedDepartments() {
-
-    return [
-        ...document.querySelectorAll(".departmentCheckbox:checked")
-    ].map(box => box.value);
-
-}
 
 // Show Highest Priority page
 function showPriority() {
@@ -208,8 +204,8 @@ function showPriority() {
 
 ${getSortedProducts()
     .filter(product =>
-        getSelectedDepartments().includes(product.department)
-    )
+    selectedDepartments.has(product.department)
+)
     .slice(
         0,
         Number(sessionStorage.getItem("priorityLimit") || 50)
@@ -319,6 +315,16 @@ document.querySelectorAll(".departmentCheckbox")
 .forEach(checkbox => {
 
     checkbox.addEventListener("change", () => {
+
+        if (checkbox.checked) {
+
+            selectedDepartments.add(checkbox.value);
+
+        } else {
+
+            selectedDepartments.delete(checkbox.value);
+
+        }
 
         showPriority();
 
