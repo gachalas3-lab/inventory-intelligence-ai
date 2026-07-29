@@ -127,6 +127,14 @@ function getSortedProducts(){
 
 }
 
+function getSelectedDepartments() {
+
+    return [
+        ...document.querySelectorAll(".departmentCheckbox:checked")
+    ].map(box => box.value);
+
+}
+
 // Show Highest Priority page
 function showPriority() {
 
@@ -151,6 +159,35 @@ function showPriority() {
     placeholder="🔍 Search priority reorders..."
 >
 
+<div class="departmentFilter">
+
+    <b>Departments:</b>
+
+    <div id="departmentCheckboxes">
+
+        ${[...new Set(uniqueProducts.map(p => p.department))]
+            .sort()
+            .map(department => `
+
+                <label class="departmentCheck">
+
+                    <input
+                        type="checkbox"
+                        class="departmentCheckbox"
+                        value="${department}"
+                        checked
+                    >
+
+                    ${department}
+
+                </label>
+
+            `).join("")}
+
+    </div>
+
+</div>
+
 <div class="priorityControls">
 
     <label><b>Show:</b></label>
@@ -170,6 +207,9 @@ function showPriority() {
 <div class="priorityList">
 
 ${getSortedProducts()
+    .filter(product =>
+        getSelectedDepartments().includes(product.department)
+    )
     .slice(
         0,
         Number(sessionStorage.getItem("priorityLimit") || 50)
@@ -272,6 +312,17 @@ document.getElementById("frequencySort")
 
     currentSort = "frequency";
     showPriority();
+
+});
+
+document.querySelectorAll(".departmentCheckbox")
+.forEach(checkbox => {
+
+    checkbox.addEventListener("change", () => {
+
+        showPriority();
+
+    });
 
 });
 
